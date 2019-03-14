@@ -29,7 +29,3 @@ eureka:
     service-url:
       defaultZone: http://localhost:18761/eureka,
       http://localhost:28761/eureka # 指定eureka服务器集群列表地址
-
-
-debug:
-  true
