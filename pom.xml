@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>config</module>
+        <module>zuul</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
