@@ -10,7 +10,7 @@ spring:
         git:
           uri: https://github.com/alittlebitcool/zyx-blog.git   # 配置git仓库地址
           search-paths: SpringCloudConfig   # 配置仓库路径
-          username: 617058979@qq.com  # 访问git仓库的用户名
+          username: alittlebitcool  # 访问git仓库的用户名
           password: L1nFenGgithub   # 访问git仓库的用户密码
           basedir: c:\\springcloudconfig # 配置中心远程clone下来的配置文件所在的位置。目录不存在的话，系统会自动创建dir目录。默认情况下，克隆下来的文件保存在C:\Users\<当前用户>\AppData\Local\Temp目录下
       label: master # 配置仓库的分支
