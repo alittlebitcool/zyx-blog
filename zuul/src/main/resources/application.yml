@@ -1,6 +1,6 @@
 spring:
   application:
-    name: com.zyx.service-zuul
+    name: zuul
 
 eureka:
   instance:
@@ -15,7 +15,7 @@ zuul:
   routes:
     api-user:
       path: /api-user/** # /api-user开头的请求，全部转发到sea-com.zyx.service-user服务中去
-      service-id: sea-com.zyx.service-user # 应用名称
+      service-id: sea-service-user # 应用名称
     api-shop:
       path: /api-shop/** # /api-shop开头的请求，全部转发到sea-web-shop服务中去
       service-id: sea-web-shop # 应用名称

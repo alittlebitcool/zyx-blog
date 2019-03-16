@@ -8,13 +8,10 @@
         <module>config</module>
         <module>zuul</module>
         <module>hystrix-dashboard</module>
-        <module>hystrix-dashboard</module>
-        <module>hystrix-dashboard</module>
-        <module>hystrix-dashboard</module>
-        <module>hystrix-dashboard</module>
         <module>hystrix</module>
         <module>provider</module>
         <module>user</module>
+        <module>shop</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
