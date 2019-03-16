@@ -17,7 +17,7 @@ spring:
       profile: dev # 开发环境
   rabbitmq: # MQ消息总线。当git服务器上配置文件发生变化时，该配置作用是：用于接收config server发出的消息，这样就实现了所有config client动态刷新bean属性
     host: localhost
-    port: 15672
+    port: 5672
     username: guest
     password: guest
 
