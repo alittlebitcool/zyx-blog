@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by YuXingZh on 19-3-19
@@ -14,12 +15,11 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name="article")
 public class Article {
-    private String id;
+    private int id;
     private String title;
     private String introduction;
-    private String html;
-    private String markdown;
-    private String createTime;
-    private String modifyTime;
-    private String likes;
+    private String content;
+    private Date createTime;
+    private Date modifyTime;
+    private int likes;
 }

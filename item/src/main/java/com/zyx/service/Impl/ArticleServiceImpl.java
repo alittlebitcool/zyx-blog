@@ -1,9 +1,12 @@
 package com.zyx.service.Impl;
 
 import com.zyx.dao.ArticleMapper;
+import com.zyx.entity.Article;
 import com.zyx.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by YuXingZh on 19-3-20
@@ -17,7 +20,7 @@ public class ArticleServiceImpl implements ArticleService {
      * 获取所有的博客
      */
     @Override
-    public void getAllBlog() {
-        articleMapper.selectAll();
+    public List<Article> getAllBlog() {
+        return articleMapper.selectAll();
     }
 }

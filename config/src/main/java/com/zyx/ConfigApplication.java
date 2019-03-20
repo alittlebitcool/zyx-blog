@@ -1,6 +1,7 @@
 package com.zyx;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -12,7 +13,7 @@ import java.util.Scanner;
  */
 @EnableConfigServer //开启配置中心服务
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class ConfigApplication {
 
     public static void main(String[] args) {

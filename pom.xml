@@ -40,6 +40,8 @@
         <eureka.starter.version>1.4.2.RELEASE</eureka.starter.version>
         <mybatis.starter.version>1.3.2</mybatis.starter.version>
         <mapper.starter.version>2.0.2</mapper.starter.version>
+        <druid.version>1.1.9</druid.version>
+        <fastjson.version>1.2.54</fastjson.version>
     </properties>
 
     <!-- 此项配置的意思是：pom.xml中的parent引用，可以引用我们自己项目的parent，而不是springcloud的parent。方便项目模块的扩展和管理。必须配置在dependencyManagement节点中 -->

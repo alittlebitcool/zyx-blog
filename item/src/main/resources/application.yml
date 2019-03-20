@@ -1,0 +1,26 @@
+mybatis:
+  type-aliases-package: com.zyx.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.mufan.custompackage.dao: debug
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.79.165.3:3306/zyx_blog?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  #--------------------------charset--------------------------
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  #--------------------------Server--------------------------
+  server:
+    tomcat:
+      uri-encoding: UTF-8
