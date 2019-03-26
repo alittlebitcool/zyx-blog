@@ -24,3 +24,5 @@ spring:
   server:
     tomcat:
       uri-encoding: UTF-8
+  thymeleaf:
+    cache: false

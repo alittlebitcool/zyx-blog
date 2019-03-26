@@ -1,43 +1,41 @@
-//package com.zyx.web;
-//
-//import com.zyx.entity.User;
-//import com.zyx.service.UserService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-//import javax.servlet.http.HttpServletRequest;
-//
-///**
-// * Created by YuXingZh on 19-3-19
-// */
-//@Controller
-//public class AdminController {
-//    @Autowired
-//    UserService userService;
-//
-//    @ResponseBody
-//    @PostMapping("/changePassword")
-//    public String changePassword(@RequestParam("phone") String phone,
-//                                 @RequestParam("authCode") String authCode,
-//                                 @RequestParam("newPassword") String newPassword,
-//                                 HttpServletRequest request){
-//
-//        String trueMsgCode = (String) request.getSession().getAttribute("trueMsgCode");
-//
-//        if(!authCode.equals(trueMsgCode)){
-//            return "0";
-//        }
-//        User user = userService.findUserByPhone(phone);
-//        if(user == null){
-//            return "2";
-//        }
-//        MD5Util md5Util = new MD5Util();
-//        String MD5Password = md5Util.encode(newPassword);
-//        userService.updatePasswordByPhone(phone, MD5Password);
-//
-//        return "1";
-//    }
-//}
+package com.zyx.web;
+
+import com.zyx.entity.User;
+import com.zyx.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Created by YuXingZh on 19-3-19
+ */
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+    @Autowired
+    UserService userService;
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "/login";
+    }
+
+    @GetMapping(value = "/validate")
+    public String detail(Model model,
+                         HttpServletRequest request) {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User user;
+        if (email == null || password == null) return "login";
+        user = new User(email, password);
+        User u = userService.checkUser(user);
+        if (u == null) return "login";
+        model.addAttribute("user", u);
+        request.getSession().setAttribute("user", u);
+        return "detail";
+    }
+}

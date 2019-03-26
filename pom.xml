@@ -15,6 +15,7 @@
         <module>item</module>
         <module>admin</module>
         <module>common</module>
+        <module>detail</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -76,6 +77,25 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${mapper.starter.version}</version>
+        </dependency>
+
+        <!--druid数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>common</artifactId>
+            <groupId>com.zyx</groupId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
