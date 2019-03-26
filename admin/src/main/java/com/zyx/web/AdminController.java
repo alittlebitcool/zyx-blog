@@ -21,9 +21,8 @@ public class AdminController {
 
     @GetMapping(value = "/login")
     public String login() {
-        return "/login";
+        return "login";
     }
-
     @GetMapping(value = "/validate")
     public String detail(Model model,
                          HttpServletRequest request) {
