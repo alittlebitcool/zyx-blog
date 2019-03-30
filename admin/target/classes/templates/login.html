@@ -1,21 +1,21 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
+    <title>管理员登录界面</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="../static/admin/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="../static/admin/i/app-icon72x72@2x.png">
+    <link rel="icon" type="image/png" href="../static/i/favicon.png" th:href="@{~/i/favicon.png}">
+    <link rel="apple-touch-icon-precomposed" href="../static/i/app-icon72x722x.png" th:href="@{~/i/app-icon72x722x.png}">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="../static/admin/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="../static/admin/css/admin.css">
-    <link rel="stylesheet" href="../static/admin/css/app.css">
+    <link rel="stylesheet" href="../static/css/amazeui.min.css" type="text/css"
+          th:href="@{~/css/amazeui.min.css}"/>
+    <link rel="stylesheet" href="../static/css/admin.css" type="text/css"  th:href="@{~/css/admin.css}">
+    <link rel="stylesheet" href="../static/css/app.css" type="text/css"  th:href="@{~/css/app.css}">
 </head>
 
 <body data-type="login">
@@ -33,7 +33,7 @@
             <i>Log In </i> or <span> Sign Up</span>
         </div>
         <div class="am-u-sm-10 login-am-center">
-            <form class="am-form" action="/admin/validate">
+            <form class="am-form" action="/admin/validate" th:action="@{/admin/validate}">
                 <fieldset>
                     <div class="am-form-group">
                         <input type="email" class="" id="doc-ipt-email-1" placeholder="输入电子邮件">
@@ -50,9 +50,9 @@
     </div>
 </div>
 
-<script src="../static/admin/js/jquery.min.js"></script>
-<script src="../static/admin/js/amazeui.min.js"></script>
-<script src="../static/admin/js/app.js"></script>
+<script src="../static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
+<script src="../static/js/amazeui.min.js" th:src="@{~/js/amazeui.min.js}"></script>
+<script src="../static/js/app.js" th:src="@{~/js/app.js}"></script>
 </body>
 
 </html>

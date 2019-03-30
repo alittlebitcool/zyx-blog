@@ -28,15 +28,14 @@ spring:
     cache: false
 
   application:
-    # 具体代码调用，请看 \sea-web-shop\src\main\java\pers\zb\web\shop\controller\ShopController.java 中的router方法；
-    name: admin # 服务提供者的应用服务名称（服务调用者是通过调用此服务名（sea-service-user）来实现服务调用的，与域名和端口号没有关系了）
+    name: admin
 
 eureka:
   instance:
     hostname: localhost
-    # 发送给eureka的心跳时间
+    # eureka的心跳时间
     lease-renewal-interval-in-seconds: 5
   client:
     service-url:
-      # 指定eureka服务器集群列表地址
+      # eureka集群
       defaultZone: http://localhost:18761/eureka,http://localhost:28761/eureka

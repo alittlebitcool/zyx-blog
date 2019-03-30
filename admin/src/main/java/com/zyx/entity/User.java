@@ -1,6 +1,8 @@
 package com.zyx.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,12 +10,14 @@ import javax.persistence.Table;
 /**
  * Created by YuXingZh on 19-3-19
  */
-@Table(name="user")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="user")
 public class User {
     @Id
     private String id;
-    private String username;
+    private String userName;
     private String password;
     private String email;
 

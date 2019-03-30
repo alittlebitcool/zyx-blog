@@ -2,6 +2,7 @@ package com.zyx;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import tk.mybatis.spring.annotation.MapperScan;
 
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
  */
 
 @SpringBootApplication
+@MapperScan("com.zyx.dao")
 public class AdminApplication {
     public static void main(String[] args) {
         System.out.println("请指定admin的启动端口号：");

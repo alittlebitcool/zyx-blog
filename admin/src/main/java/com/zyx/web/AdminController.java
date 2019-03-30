@@ -19,10 +19,11 @@ public class AdminController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/login")
+    @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/login";
     }
+
     @GetMapping(value = "/validate")
     public String detail(Model model,
                          HttpServletRequest request) {
@@ -35,6 +36,6 @@ public class AdminController {
         if (u == null) return "login";
         model.addAttribute("user", u);
         request.getSession().setAttribute("user", u);
-        return "detail";
+        return "index";
     }
 }
