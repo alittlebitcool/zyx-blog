@@ -1,6 +1,7 @@
 package com.zyx.web;
 
 import com.zyx.entity.User;
+import com.zyx.feign.FeignService;
 import com.zyx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,10 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    FeignService feignService;
+
+
     @GetMapping("/login")
     public String login() {
         return "/login";
@@ -36,6 +41,7 @@ public class AdminController {
         if (u == null) return "login";
         model.addAttribute("user", u);
         request.getSession().setAttribute("user", u);
-        return "index";
+        request.getSession().setAttribute("blogList", feignService.getAllBlog());
+        return "/index";
     }
 }

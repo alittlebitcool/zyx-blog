@@ -2,6 +2,7 @@ package com.zyx;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import java.util.Scanner;
  * 管理员 服务启动器
  */
 
+@EnableEurekaClient
 @SpringBootApplication
 @MapperScan("com.zyx.dao")
 public class AdminApplication {

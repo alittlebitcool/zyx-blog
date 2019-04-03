@@ -26,3 +26,16 @@ spring:
       uri-encoding: UTF-8
   thymeleaf:
     cache: false
+
+  application:
+    name: item
+
+eureka:
+  instance:
+    hostname: localhost
+    # eureka的心跳时间
+    lease-renewal-interval-in-seconds: 5
+  client:
+    service-url:
+      # eureka集群
+      defaultZone: http://localhost:18761/eureka,http://localhost:28761/eureka

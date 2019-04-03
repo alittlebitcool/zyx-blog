@@ -34,3 +34,6 @@ hystrix:
           thread:
             # 设置API网关路由转发请求的HystrixCommand执行超时时间，单位为毫秒（默认值1000）。断路器的超时时间大于ribbon的超时时间，才会触发重试
             timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
