@@ -35,10 +35,14 @@ public class AdminController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user;
-        if (email == null || password == null) return "login";
+        if (email == null || password == null) {
+            return "login";
+        }
         user = new User(email, password);
         User u = userService.checkUser(user);
-        if (u == null) return "login";
+        if (u == null) {
+            return "login";
+        }
         model.addAttribute("user", u);
         request.getSession().setAttribute("user", u);
         request.getSession().setAttribute("blogList", feignService.getAllBlog());

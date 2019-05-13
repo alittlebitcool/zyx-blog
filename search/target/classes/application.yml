@@ -1,0 +1,33 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: search
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300
+  jackson:
+    default-property-inclusion: non_null
+  rabbitmq:
+    virtual-host: /YuXingZh
+    username: guest
+    password: guest
+    host: 127.0.0.1
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+#    registry-fetch-interval-seconds: 5
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+eureka:
+  instance:
+    hostname: localhost
+    # 发送给eureka的心跳时间
+    lease-renewal-interval-in-seconds: 5
+  client:
+    service-url:
+      # 指定eureka服务器集群列表地址
+      defaultZone: http://localhost:18761/eureka,http://localhost:28761/eureka

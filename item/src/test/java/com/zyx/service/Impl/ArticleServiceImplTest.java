@@ -3,7 +3,11 @@ package com.zyx.service.Impl;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
+import com.zyx.entity.vo.CommentArticle;
+import com.zyx.entity.vo.TagArticle;
 import com.zyx.service.ArticleService;
+import com.zyx.service.CommentService;
+import com.zyx.service.TagService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,12 @@ public class ArticleServiceImplTest {
 
     @Autowired
     ArticleService articleService;
+//
+//    @Autowired
+//    TagService tagService;
+
+    @Autowired
+    CommentService commentService;
 
     @Test
     public void test() {
@@ -53,4 +63,10 @@ public class ArticleServiceImplTest {
         System.out.println();
         System.out.println();
     }
+
+    @Test
+    public void test1() {
+        System.out.println(commentService.getAllComment(11));
+    }
+
 }

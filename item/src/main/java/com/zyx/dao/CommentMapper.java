@@ -1,6 +1,7 @@
 package com.zyx.dao;
 
 import com.zyx.entity.Comment;
+import tk.mybatis.mapper.common.IdsMapper;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
