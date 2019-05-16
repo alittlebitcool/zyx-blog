@@ -12,4 +12,9 @@ public interface ArticleService {
      * 获取所有的博客
      */
     public List<Article> getAllBlog();
+
+    /**
+     * get special article
+     */
+    public Article getSpecial(int articleId);
 }

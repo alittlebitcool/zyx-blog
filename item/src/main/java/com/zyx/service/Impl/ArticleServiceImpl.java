@@ -23,4 +23,12 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getAllBlog() {
         return articleMapper.selectAll();
     }
+
+    /**
+     * get special article
+     */
+    @Override
+    public Article getSpecial(int articleId) {
+        return articleMapper.selectByPrimaryKey(articleId);
+    }
 }

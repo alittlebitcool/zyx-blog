@@ -22,7 +22,5 @@ public class ItemApplication {
         String port = scanner.nextLine(); //让用户指定端口号
         new SpringApplicationBuilder(ItemApplication.class).properties("server.port=" + port).run(args);//启动项目
 
-        System.out.println("================================================== item服务启动成功 " +
-                "=============================================================");
     }
 }

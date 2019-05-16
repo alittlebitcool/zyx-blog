@@ -30,6 +30,9 @@ public class ArticleServiceImplTest {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    TagService tagService;
+
     @Test
     public void test() {
 
@@ -66,7 +69,8 @@ public class ArticleServiceImplTest {
 
     @Test
     public void test1() {
-        System.out.println(commentService.getAllComment(11));
+//        System.out.println(commentService.getAllComment(11));
+        System.out.println(tagService.getSpecialTag(11));
     }
 
 }

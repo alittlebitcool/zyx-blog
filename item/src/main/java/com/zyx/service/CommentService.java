@@ -23,4 +23,5 @@ public interface CommentService {
      * @return
      */
     public List<Comment> getAllComment(int articleId) ;
+
 }

@@ -1,8 +1,5 @@
 package com.zyx.service;
 
-import com.zyx.entity.vo.CommentArticle;
-import com.zyx.entity.vo.TagArticle;
-
 import java.util.List;
 
 /**
@@ -13,8 +10,9 @@ import java.util.List;
 public interface TagService {
 
     /**
-     * get all the tags from the tag table
+     * get a tag from Article
+     * @param articleId
      * @return
      */
-    public List<CommentArticle> getAllTags(int articleId);
+    List<String> getSpecialTag(int articleId);
 }

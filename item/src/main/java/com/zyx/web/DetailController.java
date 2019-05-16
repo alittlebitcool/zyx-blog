@@ -7,6 +7,7 @@ import com.zyx.service.TagService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class DetailController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private TagService tagService;
     /**
      * get all comment from a article
      * @param articleId
@@ -37,7 +40,10 @@ public class DetailController {
     }
 
     @GetMapping("/showArticle")
-    public String showArticle(@RequestParam("articleId") int articleId) {
-        return "/detail";
+    public String showArticle(@RequestParam("articleId") int articleId, Model model) {
+        model.addAttribute("article", articleService.getSpecial(articleId));
+        model.addAttribute("comments", commentService.getAllComment(articleId));
+        model.addAttribute("tags", tagService.getSpecialTag(articleId));
+        return "detail";
     }
 }
