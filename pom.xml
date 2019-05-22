@@ -7,11 +7,7 @@
     <modules>
         <module>config</module>
         <module>zuul</module>
-        <module>hystrix-dashboard</module>
         <module>hystrix</module>
-        <module>provider</module>
-        <module>user</module>
-        <module>shop</module>
         <module>item</module>
         <module>admin</module>
         <module>common</module>

@@ -1,19 +1,15 @@
-server:
-  port: 8083
 spring:
   application:
     name: search
   data:
     elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: 127.0.0.1:9300
-  jackson:
-    default-property-inclusion: non_null
-  rabbitmq:
-    virtual-host: /YuXingZh
-    username: guest
-    password: guest
-    host: 127.0.0.1
+      cluster-nodes: 120.79.165.3:9200
+      repositories:
+        enabled: true
+      properties:
+        transport:
+          tcp:
+            connect_timeout: 120s
 #eureka:
 #  client:
 #    service-url:
@@ -22,6 +18,7 @@ spring:
 #  instance:
 #    prefer-ip-address: true
 #    ip-address: 127.0.0.1
+
 eureka:
   instance:
     hostname: localhost
