@@ -46,18 +46,7 @@ public class AdminController {
         }
         model.addAttribute("user", u);
         request.getSession().setAttribute("user", u);
-        return "/index";
-    }
-
-    /**
-     * get all blogs
-     */
-    @ResponseBody
-    @RequestMapping(
-            value = "/showAll",
-            method = RequestMethod.GET
-    )
-    public List<Article> showAll() {
-        return articleFeign.showAll();
+        model.addAttribute("blogList", articleFeign.showAll());
+        return "index";
     }
 }
