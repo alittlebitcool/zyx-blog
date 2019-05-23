@@ -3,6 +3,7 @@ package com.zyx;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import java.util.Scanner;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 @EnableEurekaClient
 @SpringBootApplication
 @MapperScan("com.zyx.dao")
+@EnableFeignClients(basePackages = { "com.zyx.feign"})
 public class AdminApplication {
     public static void main(String[] args) {
         System.out.println("请指定admin的启动端口号：");

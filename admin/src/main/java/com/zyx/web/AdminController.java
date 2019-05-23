@@ -1,15 +1,17 @@
 package com.zyx.web;
 
+import com.zyx.entity.Article;
 import com.zyx.entity.User;
-import com.zyx.feign.FeignService;
+import com.zyx.feign.ArticleFeign;
 import com.zyx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by YuXingZh on 19-3-19
@@ -21,8 +23,7 @@ public class AdminController {
     UserService userService;
 
     @Autowired
-    FeignService feignService;
-
+    ArticleFeign articleFeign;
 
     @GetMapping("/login")
     public String login() {
@@ -45,7 +46,18 @@ public class AdminController {
         }
         model.addAttribute("user", u);
         request.getSession().setAttribute("user", u);
-        request.getSession().setAttribute("blogList", feignService.getAllBlog());
         return "/index";
+    }
+
+    /**
+     * get all blogs
+     */
+    @ResponseBody
+    @RequestMapping(
+            value = "/showAll",
+            method = RequestMethod.GET
+    )
+    public List<Article> showAll() {
+        return articleFeign.showAll();
     }
 }

@@ -2,7 +2,6 @@ package com.zyx.web;
 
 import com.zyx.dao.UserMapper;
 import com.zyx.entity.Article;
-import com.zyx.feign.FeignService;
 import com.zyx.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,12 +22,10 @@ public class AdminControllerTest {
 
     @Autowired
     UserMapper userMapper;
-    @Autowired
-    FeignService feignService;
 
-    @Test
-    public void reload(){
-        List<Article> list = feignService.getAllBlog();
-        System.out.println(list);
-    }
+//    @Test
+//    public void reload(){
+//        List<Article> list = feignService.getAllBlog();
+//        System.out.println(list);
+//    }
 }
