@@ -1,6 +1,9 @@
 package com.zyx.entity;
 
 
+import javax.persistence.Id;
+import java.util.Date;
+
 /**
  * @Author YuXingZh
  * @Date ：Created in 14:23 2019/5/17
@@ -9,13 +12,13 @@ package com.zyx.entity;
 //@Document(indexName = "blog",type = "article", shards = 1,replicas = 0,
 //        refreshInterval = "-1")
 //@Data
-//public class Article {
-//    @Id
-//    private Integer id;
-//    private String title;
-//    private String introduction;
-//    private String content;
-//    private Date createTime;
-//    private Date modifyTime;
-//    private Integer likes;
-//}
+public class Article {
+    @Id
+    private Integer id;
+    private String title;
+    private String introduction;
+    private String content;
+    private Date createTime;
+    private Date modifyTime;
+    private Integer likes;
+}
