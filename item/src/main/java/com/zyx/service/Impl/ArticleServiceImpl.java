@@ -31,4 +31,23 @@ public class ArticleServiceImpl implements ArticleService {
     public Article getSpecial(int articleId) {
         return articleMapper.selectByPrimaryKey(articleId);
     }
+
+    /**
+     * add an article
+     *
+     * @param article
+     */
+    @Override
+    public void addArticleId(Article article) {
+        articleMapper.insertSelective(article);
+    }
+
+    /**
+     * delete an article
+     * @param articleId
+     */
+    @Override
+    public void deleteArticle(int articleId) {
+        articleMapper.deleteByPrimaryKey(articleId);
+    }
 }

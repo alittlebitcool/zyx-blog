@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by YuXingZh on 19-3-19
+ * @author YuXingZh
  */
 @Data
 @NoArgsConstructor
@@ -17,7 +17,9 @@ import java.util.Date;
 @Table(name = "tag")
 public class Tag {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "name")
     private String name;
     private Date createTime;
     private Date modifyTime;

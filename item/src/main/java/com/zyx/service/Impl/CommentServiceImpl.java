@@ -29,7 +29,6 @@ public class CommentServiceImpl implements CommentService {
         CommentArticle example = new CommentArticle();
         example.setArticleId(articleId);
         List<CommentArticle> list = commentArticleMapper.select(example);
-//        numbers.stream().map( i -> i*i).distinct().collect(Collectors.toList());
         return list.stream().map(i -> i.getCommentId()).distinct().collect(Collectors.toList());
     }
 

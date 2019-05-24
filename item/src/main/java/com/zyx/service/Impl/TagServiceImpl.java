@@ -8,6 +8,7 @@ import com.zyx.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class TagServiceImpl implements TagService {
 
     /**
      * get a tag from Article
+     *
      * @param articleId
      * @return
      */
@@ -36,5 +38,38 @@ public class TagServiceImpl implements TagService {
                 tagArticles.stream().map(TagArticle::getTagId).collect(Collectors.toList());
         List<Tag> tags = tagMapper.selectByIdList(tagIds);
         return tags.stream().map(Tag::getName).collect(Collectors.toList());
+    }
+
+    /**
+     * add article's tags
+     *
+     * @param tags
+     */
+    @Override
+    public void addTags(String tags, int articleId) {
+        encode(tags, articleId);
+    }
+
+    /**
+     * encode the tags
+     */
+    public void encode(String tags, int articleId) {
+        String[] splits = tags.split(",");
+        for (String split : splits) {
+            Date date = new Date();
+
+            Tag tag = new Tag();
+            tag.setName(split);
+            tag.setCreateTime(date);
+            tag.setModifyTime(date);
+            tagMapper.insert(tag);
+
+            TagArticle tagArticle = new TagArticle();
+            tagArticle.setArticleId(articleId);
+            tagArticle.setModifyTime(date);
+            tagArticle.setCreateTime(date);
+            tagArticle.setTagId(tag.getId());
+            tagArticleMapper.insert(tagArticle);
+        }
     }
 }

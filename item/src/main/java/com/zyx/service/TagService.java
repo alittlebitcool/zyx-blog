@@ -15,4 +15,9 @@ public interface TagService {
      * @return
      */
     List<String> getSpecialTag(int articleId);
+
+    /**
+     * add article's tags
+     */
+    void addTags(String tags, int articleId);
 }
