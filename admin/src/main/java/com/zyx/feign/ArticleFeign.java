@@ -30,5 +30,5 @@ public interface ArticleFeign {
     @RequestMapping(value = "/addArticle",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
-    void addArticle(@RequestBody Map<String, Object> map);
+    int addArticle(@RequestBody Map<String, Object> map);
 }

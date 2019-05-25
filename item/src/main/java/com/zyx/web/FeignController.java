@@ -38,7 +38,7 @@ public class FeignController {
 
     @ResponseBody
     @RequestMapping(value = "/addArticle", method = RequestMethod.POST)
-    public void addArticleByMap(@RequestBody Map<String, Object> map) throws ParseException {
+    public int addArticleByMap(@RequestBody Map<String, Object> map) throws ParseException {
         String tags = (String) map.get("tags");
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         Article article = new Article();
@@ -49,13 +49,15 @@ public class FeignController {
         article.setTitle((String) map.get("title"));
         articleService.addArticleId(article);
         tagService.addTags(tags, article.getId());
+        return article.getId();
     }
 
     @ResponseBody
     @RequestMapping(value = "/deleteArticle",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
-    public void deleteArticle(int articleId) {
+    public void deleteArticle(@Param("articleId") int articleId,
+            @PathVariable(value = "esId") String esId) {
         articleService.deleteArticle(articleId);
     }
 

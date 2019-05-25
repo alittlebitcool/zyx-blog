@@ -16,11 +16,6 @@ import java.util.Scanner;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class SearchApplication {
     public static void main(String[] args) {
-//        System.out.println("请指定search的启动端口号：");
-//
-//        Scanner scanner = new Scanner(System.in);
-//        String port = scanner.nextLine();
-//        new SpringApplicationBuilder(SearchApplication.class).properties("server.port=" + port).run(args);
         SpringApplication.run(SearchApplication.class, args);
     }
 }

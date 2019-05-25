@@ -5,6 +5,8 @@ import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -22,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -165,5 +168,23 @@ public class ArticleControllerTest {
         DocWriteResponse.Result result = updateResponse.getResult();
         System.out.println(result);
 //        }
+    }
+
+    @Test
+    public void test1() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(dateFormat.parse("1029-01-10"));
+        System.out.println(new Date("2019-01-10"));
+
+//        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+//        System.out.println(dateFormat1.format(new Date()));
+    }
+
+    @Test
+    public void deleteDocument() throws IOException {
+        DeleteRequest deleteRequest = new DeleteRequest("blog","doc","72");
+        DeleteResponse deleteResponse = client.delete(deleteRequest);
+        DocWriteResponse.Result result = deleteResponse.getResult();
+        System.out.println(result);
     }
 }
