@@ -56,8 +56,7 @@ public class FeignController {
     @RequestMapping(value = "/deleteArticle",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
-    public void deleteArticle(@Param("articleId") int articleId,
-            @PathVariable(value = "esId") String esId) {
+    public void deleteArticle(@Param("articleId") int articleId) {
         articleService.deleteArticle(articleId);
     }
 

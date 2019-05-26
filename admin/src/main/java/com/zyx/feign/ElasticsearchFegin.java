@@ -21,9 +21,9 @@ import java.util.Map;
 public interface ElasticsearchFegin {
 
     @RequestMapping("addDocument")
-    public void addDocument(@RequestBody Map<String, Object> map) throws IOException,
+    void addDocument(@RequestBody Map<String, Object> map) throws IOException,
             ParseException;
 
     @RequestMapping("deleteDocument")
-    public void deleteDocument(@RequestParam("articleId") String articleId) throws IOException;
+    void deleteDocument(@RequestParam("articleId") String articleId) throws IOException;
 }

@@ -2,14 +2,17 @@ package com.zyx.web;
 
 import com.zyx.entity.User;
 import com.zyx.feign.ArticleFeign;
+import com.zyx.feign.ElasticsearchFegin;
 import com.zyx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Map;
 
 /**
  * Created by YuXingZh on 19-3-19
@@ -21,6 +24,9 @@ public class AdminController {
     UserService userService;
 
     @Autowired
+    ElasticsearchFegin elasticsearchFegin;
+
+    @Autowired
     ArticleFeign articleFeign;
 
     @GetMapping("/login")
@@ -30,7 +36,7 @@ public class AdminController {
 
     @GetMapping(value = "/validate")
     public String validate(Model model,
-                         HttpServletRequest request) {
+                           HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user;
@@ -58,5 +64,26 @@ public class AdminController {
     public String detail(Model model,
                          HttpServletRequest request) {
         return "detail";
+    }
+
+    @RequestMapping(value = "/deleteArticle", method = RequestMethod.GET)
+    public String deleteArticle(Model model,
+                                HttpServletRequest request,
+                                @RequestParam("articleId") int articleId) throws IOException {
+        articleFeign.deleteArticle(articleId);
+        elasticsearchFegin.deleteDocument(String.valueOf(articleId));
+        model.addAttribute("blogList", articleFeign.showAll());
+        return "/index";
+    }
+
+    @RequestMapping(value = "/addArticle", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    public String addArticle(Model model,
+                             HttpServletRequest request, @RequestBody Map<String, Object> map) throws IOException,ParseException {
+        model.addAttribute("blogList", articleFeign.showAll());
+        int articleId = articleFeign.addArticle(map);
+        map.put("id", articleId);
+        elasticsearchFegin.addDocument(map);
+        return "/index";
     }
 }
