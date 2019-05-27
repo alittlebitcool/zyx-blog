@@ -10,8 +10,6 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,6 @@ public class ArticleTest {
     RestHighLevelClient client;
 
     /**
-     *
      * 查询全部
      */
     @Test
@@ -46,11 +43,11 @@ public class ArticleTest {
         searchRequest.types("doc");//指定类型
 
         //搜索builder
-        SearchSourceBuilder searchSourceBuilder =new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         //指定包括哪些字段，不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"id", "title",
-                        "introduction", "content", "create_time",
-                        "likes"}, new String[]{});
+                "introduction", "content", "create_time",
+                "likes"}, new String[]{});
         //设置搜索方式
         //全部搜索
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
@@ -66,7 +63,7 @@ public class ArticleTest {
         SearchHits hits = searchResponse.getHits();
         //搜索出来数据
         SearchHit[] searchHits = hits.getHits();
-        for(SearchHit hit:searchHits){
+        for (SearchHit hit : searchHits) {
             //获取源文档内容
             String id = hit.getId();
             System.out.println(id);
@@ -77,6 +74,7 @@ public class ArticleTest {
 
     /**
      * 精确查询，不对查询条件进行分词
+     *
      * @throws IOException
      */
     @Test
@@ -86,7 +84,7 @@ public class ArticleTest {
         searchRequest.types("doc");//指定类型
 
         //搜索builder
-        SearchSourceBuilder searchSourceBuilder =new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         //指定包括哪些字段，不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"id", "title",
                 "introduction", "content", "create_time",
@@ -96,7 +94,7 @@ public class ArticleTest {
 //        TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery("name", "开发");
         String[] ids = new String[]{"22"};
         List<String> idList = Arrays.asList(ids);
-        TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery("_id",idList);
+        TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery("_id", idList);
         searchSourceBuilder.query(termsQueryBuilder);
         //分页参数
         searchSourceBuilder.from(0);//起始记录下标，从0开始
@@ -110,7 +108,7 @@ public class ArticleTest {
         SearchHits hits = searchResponse.getHits();
         //搜索出来数据
         SearchHit[] searchHits = hits.getHits();
-        for(SearchHit hit:searchHits){
+        for (SearchHit hit : searchHits) {
             //获取源文档内容
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             System.out.println(sourceAsMap);
@@ -119,6 +117,7 @@ public class ArticleTest {
 
     /**
      * 指定占比的特殊搜索
+     *
      * @throws IOException
      */
     @Test
@@ -128,7 +127,7 @@ public class ArticleTest {
         searchRequest.types("doc");//指定类型
 
         //搜索builder
-        SearchSourceBuilder searchSourceBuilder =new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         //指定包括哪些字段，不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"id", "title",
                 "introduction", "content", "create_time",
@@ -151,7 +150,7 @@ public class ArticleTest {
         SearchHits hits = searchResponse.getHits();
         //搜索出来数据
         SearchHit[] searchHits = hits.getHits();
-        for(SearchHit hit:searchHits){
+        for (SearchHit hit : searchHits) {
             //获取源文档内容
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             System.out.println(sourceAsMap);
@@ -160,7 +159,7 @@ public class ArticleTest {
 
 
     /**
-     *  设置权重进行筛选
+     * 设置权重进行筛选
      * MultiMathchQuery
      */
     @Test
@@ -170,7 +169,7 @@ public class ArticleTest {
         searchRequest.types("doc");//指定类型
 
         //搜索builder
-        SearchSourceBuilder searchSourceBuilder =new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         //指定包括哪些字段，不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"title", "content",
                         "introduction"},
@@ -180,7 +179,7 @@ public class ArticleTest {
                 QueryBuilders.multiMatchQuery("spring", "title",
                         "description");
 //        multiMatchQueryBuilder.minimumShouldMatch("70%")
-        multiMatchQueryBuilder.field("title",10);
+        multiMatchQueryBuilder.field("title", 10);
         searchSourceBuilder.query(multiMatchQueryBuilder);
 
 
@@ -196,7 +195,7 @@ public class ArticleTest {
         SearchHits hits = searchResponse.getHits();
         //搜索出来数据
         SearchHit[] searchHits = hits.getHits();
-        for(SearchHit hit:searchHits){
+        for (SearchHit hit : searchHits) {
             //获取源文档内容
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             System.out.println(sourceAsMap);
@@ -214,15 +213,15 @@ public class ArticleTest {
         searchRequest.types("doc");//指定类型
 
         //搜索builder
-        SearchSourceBuilder searchSourceBuilder =new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         //指定包括哪些字段，不包括哪些字段
-        searchSourceBuilder.fetchSource(new String[]{"title","introduction"},
+        searchSourceBuilder.fetchSource(new String[]{"title", "introduction"},
                 new String[]{});
         //设置MultiMatchQuery
         MultiMatchQueryBuilder multiMatchQueryBuilder =
                 QueryBuilders.multiMatchQuery("郑煜星", "name", "description");
 //        multiMatchQueryBuilder.minimumShouldMatch("70%")
-        multiMatchQueryBuilder.field("name",10);
+        multiMatchQueryBuilder.field("name", 10);
 
 
         //基于termQuery
@@ -251,13 +250,96 @@ public class ArticleTest {
         SearchHits hits = searchResponse.getHits();
         //搜索出来数据
         SearchHit[] searchHits = hits.getHits();
-        for(SearchHit hit:searchHits){
+        for (SearchHit hit : searchHits) {
             //获取源文档内容
             Map<String, Object> sourceAsMap = hit.getSourceAsMap();
             System.out.println(sourceAsMap);
-
         }
+    }
 
 
+    @Test
+    public void keyWordsSearch() throws IOException {
+        SearchRequest searchRequest = new SearchRequest("blog");
+        searchRequest.types("doc");
+
+        //搜索builder
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        //定义高亮设置参数
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        // 设置前后缀
+        highlightBuilder.preTags("<tag style=\"color:red\">");
+        highlightBuilder.postTags("</tag>");
+        //设置高亮字段
+        highlightBuilder.fields().add(new HighlightBuilder.Field("title"));
+        HighlightBuilder.Field highlightContent = new HighlightBuilder.Field(
+                "introduction");
+        highlightContent.preTags("<strong>").postTags("</strong>");
+        highlightBuilder.fields().add(highlightContent);
+        searchSourceBuilder.highlighter(highlightBuilder);
+
+
+        //指定包括哪些字段，不包括哪些字段
+        searchSourceBuilder.fetchSource(new String[]{"title", "introduction",
+                "content", "createTime"}, new String[]{});
+        //设置MultiMatchQuery
+        MultiMatchQueryBuilder multiMatchQueryBuilder =
+                QueryBuilders.multiMatchQuery("微服务", "title",
+                        "description", "content");
+//        multiMatchQueryBuilder.minimumShouldMatch("70%")
+        multiMatchQueryBuilder.field("title", 10);
+
+
+        //布尔查询builder
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        boolQueryBuilder.must(multiMatchQueryBuilder);
+
+        //最终将布尔查询builder设置到searchSourceBuilder
+        searchSourceBuilder.query(boolQueryBuilder);
+
+        //分页参数
+//        searchSourceBuilder.from(0);//起始记录下标，从0开始
+//        searchSourceBuilder.size(1);//每页显示记录数
+        //将searchSourceBuilder设置到searchRequest中
+        searchRequest.source(searchSourceBuilder);
+
+        SearchResponse searchResponse = client.search(searchRequest);
+        //解析搜索结果
+        //匹配结果信息
+        SearchHits hits = searchResponse.getHits();
+        //搜索出来数据
+        SearchHit[] searchHits = hits.getHits();
+        for (SearchHit hit : searchHits) {
+            //获取源文档内容
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            //取出高亮字段内容
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            //name字段高亮结果
+            HighlightField highlightIntroduction = highlightFields.get(
+                    "introduction");
+            HighlightField highlightTitle = highlightFields.get(
+                    "title");
+            if (highlightIntroduction != null) {
+                Text[] fragments = highlightIntroduction.getFragments();
+                StringBuffer name = new StringBuffer();
+                for (Text text : fragments) {
+                    String string = text.string();
+                    name.append(string);
+                }
+                sourceAsMap.put("introduction", name);
+                System.out.println(name);
+            }
+
+            if (highlightTitle != null) {
+                Text[] fragments = highlightTitle.getFragments();
+                StringBuffer name = new StringBuffer();
+                for (Text text : fragments) {
+                    String string = text.string();
+                    name.append(string);
+                }
+                sourceAsMap.put("title", name);
+                System.out.println(name);
+            }
+        }
     }
 }

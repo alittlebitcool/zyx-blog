@@ -15,6 +15,7 @@ import java.util.Scanner;
 @EnableEurekaClient
 @SpringBootApplication
 @MapperScan("com.zyx.dao")
+@EnableFeignClients(basePackages = { "com.zyx.feign"})
 public class ItemApplication {
     public static void main(String[] args) {
         System.out.println("请指定item的启动端口号：");

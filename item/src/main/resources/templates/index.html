@@ -30,21 +30,33 @@
             th:src="@{~/index/vendor/html5shiv.js}"></script>
     <script type="text/javascript" src="../static/index/vendor/respond.js"
             th:src="@{~/index/vendor/respond.js}"></script>
-    <!--<script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js" th:src="@{http://html5shiv.googlecode.com/svn/trunk/html5.js}"-->
-    <!--&gt;</script>-->
-    <!-- Fix Internet Explorer ______________________________________-->
-    <!--<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>-->
-    <!--<script src="../static/vendor/html5shiv.js"></script>-->
-    <!--<script src="../static/vendor/respond.js"></script>-->
 
-
+    <script type="text/javascript">
+        function search() {
+            var title = document.getElementById("title").value;
+            $.ajax({
+                type: "GET",
+                // dataType: "json",
+                url: '/elasticsearch/keyWordsSearch?'+title,
+                contentType: "application/x-www-form-urlencoded",
+                // data:JSON.stringify({
+                //     "title": title,
+                //     "introduction": introduction,
+                //     "tags": tags,
+                //     "createTime": createTime,
+                //     "content":content
+                // }),
+                window:location.href="/elasticsearch/keyWordsSearch?"+title
+            });
+        }
+    </script>
 </head>
 
 <body>
 <div class="search-box" id="searchWrapper">
     <div id="close-button"></div>
     <div class="container">
-        <form action="#">
+        <form onclick="search">
             <div class="greeting-text"><span class="greeting"></span></div>
             <div class="input-wrapper">
                 <input type="text" placeholder="type your keyword" autofocus>
@@ -143,24 +155,6 @@
         Theme Header
     ==============================================
     -->
-    <header class="theme-main-header">
-        <div class="container">
-            <div class="content-holder clearfix">
-                <div class="logo">
-                    <a href="index.html">
-                    <img src="../static/index/images/logo/logo.png" alt=""
-                         th:src="@{~/images/logo/logo.png}"></a></div>
-                <!-- ============== Menu Warpper ================ -->
-                <div class="menu-wrapper">
-                    <nav id="mega-menu-holder" class="clearfix">
-                        <ul class="clearfix">
-                            <li><a href="index.html">Home</a></li>
-                        </ul>
-                    </nav> <!-- /#mega-menu-holder -->
-                </div> <!-- /.menu-wrapper -->
-            </div> <!-- /.content-holder -->
-        </div> <!-- /.container -->
-    </header> <!-- /.theme-main-header -->
 
 
     <!--
@@ -339,13 +333,13 @@
                         <ul class="author-meta clearfix">
                             <li class="tag"><a href="#">Lifestyle</a></li>
                             <li class="date">
-                                <a href="#" th:text="${blog.modifyTime}">
+                                <a href="#" th:text="${blog.createTime}">
                                     <!--15 may , 2018-->
                                 </a>
                             </li>
                         </ul>
                         <h4 class="title">
-                            <a href="#" th:text="${blog.title}">
+                            <a href="#" th:utext="${blog.title}">
                             <a href="#">
                                 <!--This is a standard post with an image-->
                             </a>
@@ -389,7 +383,7 @@
                                 </ul>
                             </li> <!-- /.share-option -->
                         </ul>
-                        <p th:text="${blog.introduction}">
+                        <p th:utext="${blog.introduction}">
                         <!--<p>-->
                             <!--One morning, when Gregor Samsa woke from -->
                             <!--troubled -->

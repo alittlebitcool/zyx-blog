@@ -46,7 +46,7 @@ public class ArticleControllerTest {
                 Settings.builder().put("number_of_shards", 1)//索引库的分片数量
                         .put("number_of_replicas", 0));
         //参数：String type, String source, XContentType xContentType
-        String mapping_source = "{\"properties\":{\"id\":{\"type\":\"integer\"},\"title\":{\"type\":\"text\",\"analyzer\":\"hanlp_index\",\"search_analyzer\":\"hanlp_index\"},\"introduction\":{\"type\":\"text\",\"analyzer\":\"hanlp_nlp\",\"search_analyzer\":\"hanlp_nlp\"},\"content\":{\"type\":\"text\",\"analyzer\":\"hanlp_nlp\",\"search_analyzer\":\"hanlp_nlp\"},\"createTime\":{\"type\":\"date\",\"format\":\"yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis\"},\"likes\":{\"type\":\"integer\"}}}";
+        String mapping_source = "{\"properties\":{\"id\":{\"type\":\"integer\"},\"title\":{\"type\":\"text\",\"analyzer\":\"hanlp_index\",\"search_analyzer\":\"hanlp_index\"},\"introduction\":{\"type\":\"text\",\"analyzer\":\"hanlp_index\",\"search_analyzer\":\"hanlp_index\"},\"content\":{\"type\":\"text\",\"analyzer\":\"hanlp_nlp\",\"search_analyzer\":\"hanlp_nlp\"},\"createTime\":{\"type\":\"date\",\"format\":\"yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis\"},\"likes\":{\"type\":\"integer\"}}}";
         createIndexRequest.mapping("doc", mapping_source, XContentType.JSON);
 
         //创建IndicesClient对象向ES提交请求
@@ -63,7 +63,7 @@ public class ArticleControllerTest {
     public void testDeleteIndex() throws IOException {
         //用于创建索引库的对象，指定索引库名称
         DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(
-                "school");
+                "blog");
 
         //创建IndicesClient对象向ES提交请求
         IndicesClient indices = client.indices();

@@ -71,7 +71,7 @@
                             <span class="post-author"><i>by</i><a href="#">zhengyuxing</a></span>
                         </h5>
                         <h2 class="post-title"
-                            th:text="${article.title}">title</h2>
+                            th:utext="${article.title}">title</h2>
                         <div class="row">
                             <h5 class="taxonomy pull-left">
                                 <i>in</i>
@@ -89,7 +89,7 @@
                     <div class="post-content row">
                         <blockquote class="has-sign row m0">
                             <div>
-                                <p th:text="${article.introduction}">If
+                                <p th:utext="${article.introduction}">If
                                     everybody learns
                                     this simple art of
                                     loving his work, whatever
@@ -100,7 +100,7 @@
                             </div>
                         </blockquote>
                         <blockquote class="no-sign">
-                            <p th:text="${article.content}">Nemo enim ipsam
+                            <p th:utext="${article.content}">Nemo enim ipsam
                                 voluptatem quia voluptas sit
                                 aspernatur aut odit aut
                                 fugit, sed quia consequuntur magni dolores eos
