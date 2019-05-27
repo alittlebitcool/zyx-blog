@@ -33,11 +33,11 @@
 
     <script type="text/javascript">
         function search() {
-            var title = document.getElementById("title").value;
+            var title =$("#title").val();
             $.ajax({
                 type: "GET",
                 // dataType: "json",
-                url: '/elasticsearch/keyWordsSearch?'+title,
+                url: '/blogs/keyWordsSearch?'+title,
                 contentType: "application/x-www-form-urlencoded",
                 // data:JSON.stringify({
                 //     "title": title,
@@ -46,7 +46,7 @@
                 //     "createTime": createTime,
                 //     "content":content
                 // }),
-                window:location.href="/elasticsearch/keyWordsSearch?"+title
+                window:location.href="/blogs/keyWordsSearch?"+title
             });
         }
     </script>
@@ -56,10 +56,12 @@
 <div class="search-box" id="searchWrapper">
     <div id="close-button"></div>
     <div class="container">
-        <form onclick="search">
+        <form action="/blogs/keyWordsSearch" method="get">
             <div class="greeting-text"><span class="greeting"></span></div>
             <div class="input-wrapper">
-                <input type="text" placeholder="type your keyword" autofocus>
+                <input name="keyWords" type="text"
+                       autocomplete="off"
+                       placeholder="type your keyword" autofocus>
             </div>
         </form>
     </div>
