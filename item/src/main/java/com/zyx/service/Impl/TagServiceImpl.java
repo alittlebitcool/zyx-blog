@@ -51,6 +51,16 @@ public class TagServiceImpl implements TagService {
     }
 
     /**
+     * Select all tags from database
+     *
+     * @return
+     */
+    @Override
+    public List<String> selectAllTags() {
+        return tagMapper.selectAllTags();
+    }
+
+    /**
      * encode the tags
      */
     public void encode(String tags, int articleId) {

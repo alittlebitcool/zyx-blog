@@ -131,15 +131,19 @@
                         <!--</p>-->
                     </div>
                     <div class="row m0 tags">
-                        <a href="#" class="tag" th:each="tag:${tags}"
+                        <a th:if="tags!=null" href="#" class="tag"
+                           th:each="tag:${tags}"
                            th:text="${tag}">music
                         </a>
                     </div>
 
                     <ul class="pager">
                         <li>
-                            <h4>Previous Articles</h4>
-                            <h2 class="post-title"><a href="single2.html">Nature,
+                            <h4 th:text="${recommend1.title}">Previous Articles</h4>
+                            <h2 class="post-title"><a href="#"
+                                                      th:href="@{~/details/showArticle?articleId=}+${recommend1.id}"
+                                                      th:text="${recommend1.introduction}"
+                            >Nature,
                                 in the broadest
                                 sense, is the natural, physical...</a></h2>
                             <h5 class="taxonomy pull-left">
@@ -148,8 +152,11 @@
                             </h5>
                         </li>
                         <li>
-                            <h4>Next Articles</h4>
-                            <h2 class="post-title"><a href="single2.html">Nature,
+                            <h4 th:text="${recommend2.title}">Next Articles</h4>
+                            <h2 class="post-title"><a href="#"
+                                                      th:href="@{~/details/showArticle?articleId=}+${recommend2.id}"
+                                                      th:text="${recommend2.introduction}"
+                            >Nature,
                                 in the broadest
                                 sense, is the natural, physical...</a></h2>
                         </li>
@@ -233,24 +240,16 @@
             <div class="widget col-sm-5 widget-menu">
                 <div class="row">
                     <ul class="nav column-menu white-bg">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="/static/detail/about.html">About</a></li>
-                        <li><a href="/static/detail/single.html">Blog Single
-                            1</a></li>
-                        <li><a href="/static/detail/single2.html">Blog Single
-                            2</a></li>
+                        <li class="active"><a href="/blogs/showAll">Home</a></li>
                     </ul>
                     <ul class="nav column-menu white-bg">
-                        <li><a href="/static/detail/single3.html">Blog Single
-                            3</a></li>
-
-                        <li><a href="/static/detail/contact.html">contact</a>
-                        </li>
+                        <li><a
+                                href="https://github.com/alittlebitcool/zyx-blog">Github地址</a></li>
                     </ul>
                 </div>
             </div>
             <div class="widget col-sm-4 widget-subscribe">
-                <h5 class="widget-title">subscribe to our newsletter.</h5>
+                <h5 class="widget-title">Search For Your Like</h5>
                 <form action="#" method="post"
                       class="form-inline subscribe-form">
                     <div class="form-group">
@@ -262,11 +261,6 @@
                 </form>
             </div>
         </div>
-        <h5 class="copyright">Copyright &copy; 2017.Company name All rights
-            reserved.<a
-                    target="_blank"
-                    href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-        </h5>
     </div>
 </footer>
 

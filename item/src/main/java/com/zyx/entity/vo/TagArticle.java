@@ -20,11 +20,11 @@ import java.util.Date;
 @Table(name="tag_article")
 public class TagArticle {
     @Id
-    private int id;
+    private Integer id;
     @Column(name = "tag_id")
-    private int tagId;
+    private Integer tagId;
     @Column(name = "article_id")
-    private int articleId;
+    private Integer articleId;
     private Date createTime;
     private Date modifyTime;
 }

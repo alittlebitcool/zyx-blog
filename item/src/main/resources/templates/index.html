@@ -333,7 +333,7 @@
                     </div>
                     <div class="post-meta-box bg-box">
                         <ul class="author-meta clearfix">
-                            <li class="tag"><a href="#">Lifestyle</a></li>
+                            <li class="tag"><a href="#">Article</a></li>
                             <li class="date">
                                 <a href="#" th:text="${blog.createTime}">
                                     <!--15 may , 2018-->
@@ -341,7 +341,8 @@
                             </li>
                         </ul>
                         <h4 class="title">
-                            <a href="#" th:utext="${blog.title}">
+                            <a
+                                    th:href="@{~/details/showArticle?articleId=}+${blog.id}" th:utext="${blog.title}">
                             <a href="#">
                                 <!--This is a standard post with an image-->
                             </a>
@@ -422,39 +423,17 @@
                 </div> <!-- /.about-me -->
                 <div class="sidebar-box bg-box sidebar-trending-post">
                     <h6 class="sidebar-title">Trending Post</h6>
-                    <div class="single-trending-post clearfix">
+                    <div class="single-trending-post clearfix"
+                         th:each="hotblog : ${hotList}">
                         <div class="post float-left">
-                            <h6><a href="#">New Benefits For Small Business </a></h6>
+                            <h6><a th:text="${hotblog.title}">New
+                                Benefits For Small Business
+                            </a></h6>
                             <ul>
-                                <li class="tag">lifestyle</li>
-                                <li class="date">16 march</li>
-                            </ul>
-                        </div> <!-- /.post -->
-                    </div> <!-- /.single-trending-post -->
-                    <div class="single-trending-post clearfix">
-                        <div class="post float-left">
-                            <h6><a href="#">New Benefits For Small Business </a></h6>
-                            <ul>
-                                <li class="tag">art</li>
-                                <li class="date">15 march</li>
-                            </ul>
-                        </div> <!-- /.post -->
-                    </div> <!-- /.single-trending-post -->
-                    <div class="single-trending-post clearfix">
-                        <div class="post float-left">
-                            <h6><a href="#">New Benefits For Small Business </a></h6>
-                            <ul>
-                                <li class="tag">travel</li>
-                                <li class="date">13 march</li>
-                            </ul>
-                        </div> <!-- /.post -->
-                    </div> <!-- /.single-trending-post -->
-                    <div class="single-trending-post clearfix">
-                        <div class="post float-left">
-                            <h6><a href="#">New Benefits For Small Business </a></h6>
-                            <ul>
-                                <li class="tag">life</li>
-                                <li class="date">10 march</li>
+                                <li class="tag">hot blog</li>
+                                <li class="date"
+                                    th:text="${hotblog.createTime}">16
+                                    march</li>
                             </ul>
                         </div> <!-- /.post -->
                     </div> <!-- /.single-trending-post -->
@@ -475,14 +454,9 @@
                 <div class="sidebar-box bg-box sidebar-tags">
                     <h6 class="sidebar-title">Keyword</h6>
                     <ul class="clearfix">
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Fashion</a></li>
-                        <li><a href="#">Graphic</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Personal</a></li>
-                        <li><a href="#">Branding</a></li>
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Travel</a></li>
+                        <li th:each="tag : ${tags}"><a href="#"
+                               th:text="${tag}">Design
+                        </a></li>
                     </ul>
                 </div> <!-- /.sidebar-tags -->
                 <div class="sidebar-box bg-box sidebar-newsletter">

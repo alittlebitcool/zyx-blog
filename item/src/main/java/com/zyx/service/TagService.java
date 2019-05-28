@@ -20,4 +20,10 @@ public interface TagService {
      * add article's tags
      */
     void addTags(String tags, int articleId);
+
+    /**
+     * Select all tags from database
+     * @return
+     */
+    List<String> selectAllTags();
 }

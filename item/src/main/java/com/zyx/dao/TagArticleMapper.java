@@ -11,6 +11,6 @@ import tk.mybatis.mapper.common.ids.SelectByIdsMapper;
  * Created by YuXingZh on 19-3-19
  */
 public interface TagArticleMapper extends Mapper<TagArticle>,
-        SelectByIdListMapper<Tag, Integer> {
+        SelectByIdListMapper<TagArticle, Integer> {
 
 }

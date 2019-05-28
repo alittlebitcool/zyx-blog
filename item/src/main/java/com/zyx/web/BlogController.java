@@ -2,6 +2,7 @@ package com.zyx.web;
 
 import com.zyx.feign.ElasticsearchFeign;
 import com.zyx.service.ArticleService;
+import com.zyx.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class BlogController {
     @Autowired
     ElasticsearchFeign elasticsearchFeign;
 
+    @Autowired
+    TagService tagService;
+
     @GetMapping("/showAll")
     public String listEsblogs(
             @RequestParam(value="order",required=false,defaultValue="new") String order,
@@ -32,6 +36,8 @@ public class BlogController {
             @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
             Model model) {
         model.addAttribute("blogList", articleService.getAllBlog());
+        model.addAttribute("hotList", articleService.selectHotArticle());
+        model.addAttribute("tags", tagService.selectAllTags());
         return "/index";
     }
 
@@ -45,6 +51,8 @@ public class BlogController {
             @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
             Model model) throws IOException {
         model.addAttribute("blogList", elasticsearchFeign.keyWordsSearch(keyWords));
+        model.addAttribute("hotList", articleService.selectHotArticle());
+        model.addAttribute("tags", tagService.selectAllTags());
         return "/index";
     }
 }

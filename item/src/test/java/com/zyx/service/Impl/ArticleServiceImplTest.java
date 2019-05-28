@@ -3,7 +3,12 @@ package com.zyx.service.Impl;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
-import com.zyx.entity.vo.CommentArticle;
+import com.hankcs.hanlp.suggest.Suggester;
+import com.zyx.dao.ArticleMapper;
+import com.zyx.dao.TagArticleMapper;
+import com.zyx.dao.TagMapper;
+import com.zyx.entity.Article;
+import com.zyx.entity.Tag;
 import com.zyx.entity.vo.TagArticle;
 import com.zyx.service.ArticleService;
 import com.zyx.service.CommentService;
@@ -13,6 +18,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by YuXingZh on 19-3-21
@@ -43,21 +52,18 @@ public class ArticleServiceImplTest {
         CoNLLSentence sentence = HanLP.parseDependency("徐先生还具体帮助他确定了把画雄鹰、松鼠和麻雀作为主攻目标。");
         System.out.println(sentence);
         // 可以方便地遍历它
-        for (CoNLLWord word : sentence)
-        {
+        for (CoNLLWord word : sentence) {
             System.out.printf("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
         }
         // 也可以直接拿到数组，任意顺序或逆序遍历
         CoNLLWord[] wordArray = sentence.getWordArray();
-        for (int i = wordArray.length - 1; i >= 0; i--)
-        {
+        for (int i = wordArray.length - 1; i >= 0; i--) {
             CoNLLWord word = wordArray[i];
             System.out.printf("%s --(%s)--> %s\n", word.LEMMA, word.DEPREL, word.HEAD.LEMMA);
         }
         // 还可以直接遍历子树，从某棵子树的某个节点一路遍历到虚根
         CoNLLWord head = wordArray[12];
-        while ((head = head.HEAD) != null)
-        {
+        while ((head = head.HEAD) != null) {
             if (head == CoNLLWord.ROOT) System.out.println(head.LEMMA);
             else System.out.printf("%s --(%s)--> ", head.LEMMA, head.DEPREL);
         }
@@ -67,10 +73,51 @@ public class ArticleServiceImplTest {
         System.out.println();
     }
 
+    @Autowired
+    TagArticleMapper tagArticleMapper;
+
+    @Autowired
+    TagMapper tagMapper;
+
     @Test
     public void test1() {
 //        System.out.println(commentService.getAllComment(11));
-        System.out.println(tagService.getSpecialTag(11));
+//        System.out.println(tagService.getSpecialTag(11));
+        TagArticle tagArticle = new TagArticle();
+        tagArticle.setArticleId(11);
+        List<TagArticle> tagArticles = tagArticleMapper.select(tagArticle);
+        System.out.println(tagArticles);
+        List<Integer> tagIds =
+                tagArticles.stream().map(TagArticle::getTagId).collect(Collectors.toList());
+        System.out.println(tagArticles.stream().map(TagArticle::getTagId).collect(Collectors.toList()));
+        List<Tag> tags = tagMapper.selectByIdList(tagIds);
+        System.out.println(tags.stream().map(Tag::getName).collect(Collectors.toList()));
+    }
+
+    @Autowired
+    ArticleMapper articleMapper;
+
+    @Test
+    public void test2() {
+        Suggester suggester = new Suggester();
+        List<Article> articles = articleMapper.selectAll();
+        List<String> introductions =
+                articles.stream().map(i -> i.getIntroduction()).distinct().collect(Collectors.toList());
+        for (String introduction : introductions) {
+            suggester.addSentence(introduction);
+        }
+
+        List<String> suggest = suggester.suggest("thymeleaf教程", 2);
+        List<Article> res = new ArrayList<>();
+        for (Article article : articles) {
+            if (article.getIntroduction().equals(suggest.get(0)) && res.size() < 2) {
+                res.add(article);
+            }
+            if (article.getIntroduction().equals(suggest.get(1)) && res.size() < 2) {
+                res.add(article);
+            }
+        }
+        System.out.println(res);
     }
 
 }
