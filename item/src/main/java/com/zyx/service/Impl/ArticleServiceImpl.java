@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -79,13 +80,15 @@ public class ArticleServiceImpl implements ArticleService {
             suggester.addSentence(introduction);
         }
 
-        List<String> suggest = suggester.suggest(title, 2);
+        List<String> suggest = suggester.suggest(title, 6);
         List<Article> res = new ArrayList<>();
+        int random1 = (int)(Math.random() * 5) + 1;;
+        int random2 = (random1 + 1) % 5;
         for (Article article : articles) {
-            if (article.getIntroduction().equals(suggest.get(0)) && res.size() < 2) {
+            if (article.getIntroduction().equals(suggest.get(random1)) && res.size() < 2) {
                 res.add(article);
             }
-            if (article.getIntroduction().equals(suggest.get(1)) && res.size() < 2) {
+            if (article.getIntroduction().equals(suggest.get(random2)) && res.size() < 2) {
                 res.add(article);
             }
         }
