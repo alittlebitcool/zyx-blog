@@ -3,6 +3,7 @@ package com.zyx.web;
 import com.zyx.feign.ElasticsearchFeign;
 import com.zyx.service.ArticleService;
 import com.zyx.service.TagService;
+import com.zyx.util.Transformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Created by YuXingZh on 19-3-20
@@ -49,8 +51,9 @@ public class BlogController {
             @RequestParam(value="async",required=false) boolean async,
             @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
             @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
-            Model model) throws IOException {
-        model.addAttribute("blogList", elasticsearchFeign.keyWordsSearch(keyWords));
+            Model model) throws IOException, ParseException {
+        model.addAttribute("blogList",
+                Transformation.jsontoarticle(elasticsearchFeign.keyWordsSearch(keyWords)));
         model.addAttribute("hotList", articleService.selectHotArticle());
         model.addAttribute("tags", tagService.selectAllTags());
         return "/index";

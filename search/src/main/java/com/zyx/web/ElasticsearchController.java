@@ -16,12 +16,18 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author YuXingZh
@@ -80,7 +86,7 @@ public class ElasticsearchController {
 
         highlightBuilder.fields().add(new HighlightBuilder.Field(
                 "introduction").preTags("<tag style=\"color:pink\">").postTags(
-                        "</tag>"));
+                "</tag>"));
 
         highlightBuilder.fields().add(new HighlightBuilder.Field("title").preTags("<tag style=\"color:pink\">").postTags("</tag>"));
 
@@ -88,7 +94,8 @@ public class ElasticsearchController {
 
 
         //指定包括哪些字段，不包括哪些字段
-        searchSourceBuilder.fetchSource(new String[]{"title", "introduction",
+        searchSourceBuilder.fetchSource(new String[]{"id", "title",
+                "introduction",
                 "content", "createTime"}, new String[]{});
         //设置MultiMatchQuery
         MultiMatchQueryBuilder multiMatchQueryBuilder =
