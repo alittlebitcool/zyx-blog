@@ -259,9 +259,11 @@
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                <a
+                                                        th:href="'update?articleId='+${blog.id}"
+                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary">
                                                     <span class="am-icon-pencil-square-o"></span> 编辑
-                                                </button>
+                                                </a>
                                                 <a th:href="'deleteArticle?articleId='+${blog.id}"
                                                         class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
                                                     <span class="am-icon-trash-o"></span> 删除
@@ -272,20 +274,21 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="am-cf">
+                            <!--预留分页接口-->
+                            <!--<div class="am-cf">-->
 
-                                <div class="am-fr">
-                                    <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled"><a href="#">«</a></li>
-                                        <li class="am-active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                                <!--<div class="am-fr">-->
+                                    <!--<ul class="am-pagination tpl-pagination">-->
+                                        <!--<li class="am-disabled"><a href="#">«</a></li>-->
+                                        <!--<li class="am-active"><a href="#">1</a></li>-->
+                                        <!--<li><a href="#">2</a></li>-->
+                                        <!--<li><a href="#">3</a></li>-->
+                                        <!--<li><a href="#">4</a></li>-->
+                                        <!--<li><a href="#">5</a></li>-->
+                                        <!--<li><a href="#">»</a></li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <hr>
 
                         </form>

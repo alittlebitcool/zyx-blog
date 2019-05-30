@@ -76,13 +76,33 @@ public class AdminController {
         return "/index";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/addArticle", method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
-    public String addArticle(Model model,
-                             HttpServletRequest request, @RequestBody Map<String, Object> map) throws IOException,ParseException {
+    public String addArticleByMap(Model model,
+                               @RequestBody Map<String, Object> map) throws ParseException, IOException {
         model.addAttribute("blogList", articleFeign.showAll());
         int articleId = articleFeign.addArticle(map);
         map.put("id", articleId);
+        map.remove("tags");
+        elasticsearchFegin.addDocument(map);
+        return "/index";
+    }
+
+    @GetMapping(value = "/update")
+    public String update(Model model, @RequestParam("articleId") int articleId,
+                         HttpServletRequest request) {
+        model.addAttribute(articleFeign.getSpecialArticle(articleId));
+        return "update";
+    }
+
+    @RequestMapping(value = "/updateArticle", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    public String updateArticle(Model model,
+                                HttpServletRequest request, @RequestBody Map<String, Object> map) throws IOException, ParseException {
+        model.addAttribute("blogList", articleFeign.showAll());
+        int articleId = articleFeign.updateArticle(map);
+        map.put("id", String.valueOf(articleId));
         elasticsearchFegin.addDocument(map);
         return "/index";
     }

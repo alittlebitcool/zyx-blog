@@ -2,14 +2,19 @@ package com.zyx.service.Impl;
 
 import com.hankcs.hanlp.suggest.Suggester;
 import com.zyx.dao.ArticleMapper;
+import com.zyx.dao.TagMapper;
 import com.zyx.entity.Article;
+import com.zyx.entity.Tag;
 import com.zyx.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -19,6 +24,9 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     ArticleMapper articleMapper;
+
+    @Autowired
+    TagMapper tagMapper;
 
     /**
      * 获取所有的博客
@@ -82,7 +90,8 @@ public class ArticleServiceImpl implements ArticleService {
 
         List<String> suggest = suggester.suggest(title, 6);
         List<Article> res = new ArrayList<>();
-        int random1 = (int)(Math.random() * 5) + 1;;
+        int random1 = (int) (Math.random() * 5) + 1;
+        ;
         int random2 = (random1 + 1) % 5;
         for (Article article : articles) {
             if (article.getIntroduction().equals(suggest.get(random1)) && res.size() < 2) {
@@ -93,5 +102,47 @@ public class ArticleServiceImpl implements ArticleService {
             }
         }
         return res;
+    }
+
+    /**
+     * update datase article
+     *
+     * @param map
+     */
+    @Override
+    public void updateArticle(Map<String, Object> map) throws ParseException {
+        Article article = new Article();
+        article.setId(Integer.valueOf((String) map.get("id")));
+        article.setTitle((String) map.get("title"));
+        article.setContent((String) map.get("content"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        article.setModifyTime(sdf.parse((String) map.get("createTime")));
+        article.setCreateTime(sdf.parse((String) map.get("createTime")));
+        article.setIntroduction((String) map.get("introduction"));
+        articleMapper.updateByPrimaryKeySelective(article);
+    }
+
+    /**
+     * get article
+     *
+     * @param articleId
+     */
+    @Override
+    public Article getSpecialArticle(int articleId) {
+        return articleMapper.selectByPrimaryKey(articleId);
+    }
+
+    /**
+     * get tag's correspond article
+     *
+     * @param
+     * @return
+     */
+    @Override
+    public List<Article> tagSearch(String name) {
+        Example example = new Example(Tag.class);
+        example.and().andEqualTo("name", name);
+        tagMapper.selectByExample(example);
+        return articleMapper.selectByIdList(tagMapper.selectByExample(example).stream().map(Tag::getId).collect(Collectors.toList()));
     }
 }

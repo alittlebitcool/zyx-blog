@@ -4,19 +4,43 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>郑煜星博客小屋首页</title>
+    <title>郑煜星博客小屋添加页面</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="../static/i/favicon.png" th:href="@{~/i/favicon.png}">
-    <link rel="apple-touch-icon-precomposed" href="../static/i/app-icon72x722x.png" th:href="@{~/i/app-icon72x722x.png}">
+    <link th:href="@{~/i/favicon.png}" rel="icon" type="image/png" href="../static/i/favicon.png">
+    <link th:href="@{~/i/app-icon72x722x.png}" rel="apple-touch-icon-precomposed" href="../static/i/app-icon72x722x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="../static/css/amazeui.min.css"
-          th:href="@{~/css/amazeui.min.css}" />
-    <link rel="stylesheet" href="../static/css/admin.css" th:href="@{~/css/admin.css}">
-    <link rel="stylesheet" href="../static/css/app.css" th:href="@{~/css/app.css}">
+    <link th:href="@{~/css/amazeui.min.css}" rel="stylesheet" href="../static/css/amazeui.min.css"/>
+    <link th:href="@{~/css/admin.css}" rel="stylesheet" href="../static/css/admin.css">
+    <link th:href="@{~/css/app.css}" rel="stylesheet" href="../static/css/app.css">
+    <script type="text/javascript">
+        function login() {
+            var id = document.getElementById("id").value;
+            var title = document.getElementById("title").value;
+            var introduction = document.getElementById("introduction").value;
+            var tags = document.getElementById("tags").value;
+            var createTime = document.getElementById("createTime").value;
+            var content = document.getElementById("content").value;
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/admin/updateArticle',
+                contentType: "application/json",
+                data:JSON.stringify({
+                    "id" : id,
+                    "title": title,
+                    "introduction": introduction,
+                    "tags": tags,
+                    "createTime": createTime,
+                    "content":content
+                }),
+                window:location.href="/admin/index"
+            });
+        }
+    </script>
 </head>
 
 <body data-type="generalComponents">
@@ -25,7 +49,7 @@
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
         <a href="javascript:;" class="tpl-logo">
-            <img src="../static/img/logo.png" alt="" th:src="@{~/img/logo.png}">
+            <img src="../static/img/logo.png" alt="">
         </a>
     </div>
     <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
@@ -80,7 +104,7 @@
                     <li>
                         <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="../static/img/user02.png" th:src="@{~/img/user02.png}" alt=""> </span>
+                      <img src="../static/img/user02.png" alt=""> </span>
                             <span class="tpl-dropdown-content-subject">
                       <span class="tpl-dropdown-content-from"> 禁言小张 </span>
                                 <span class="tpl-dropdown-content-time">10分钟前 </span>
@@ -89,8 +113,7 @@
                         </a>
                         <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="../static/img/user03.png" th:src="@{~/img/user03.png}" alt="">
-                                </span>
+                      <img src="../static/img/user03.png" alt=""> </span>
                             <span class="tpl-dropdown-content-subject">
                       <span class="tpl-dropdown-content-from"> Steam </span>
                                 <span class="tpl-dropdown-content-time">18分钟前</span>
@@ -160,8 +183,7 @@
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
                     <span class="tpl-header-list-user-nick">禁言小张</span><span
-                        class="tpl-header-list-user-ico">
-                    <img src="../static/img/user01.png" th:src="@{~/img/user01.png}"></span>
+                        class="tpl-header-list-user-ico"> <img src="../static/img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
                     <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
@@ -177,8 +199,6 @@
 
 
 <div class="tpl-page-container tpl-page-header-fixed">
-
-
     <div class="tpl-left-nav tpl-left-nav-hover">
         <div class="tpl-left-nav-title">
             管理员操作列表
@@ -186,7 +206,7 @@
         <div class="tpl-left-nav-list">
             <ul class="tpl-left-nav-menu">
                 <li class="tpl-left-nav-item">
-                    <a href="/admin/index" class="nav-link active">
+                    <a href="/admin/index" class="nav-link">
                         <i class="am-icon-home"></i>
                         <span>首页</span>
                     </a>
@@ -194,15 +214,17 @@
 
 
                 <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <!-- 打开状态 a 标签添加 active 即可   -->
+                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
                         <i class="am-icon-wpforms"></i>
                         <span>博客操作</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                        <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                     </a>
-                    <ul class="tpl-left-nav-sub-menu">
+                    <!-- 打开状态 添加 display:block-->
+                    <ul class="tpl-left-nav-sub-menu" style="display: block;">
                         <li>
-
-                            <a href="/admin/addArticle">
+                            <a href="/admin/addArticle" class="active">
                                 <i class="am-icon-angle-right"></i>
                                 <span>添加博客</span>
                             </a>
@@ -220,83 +242,122 @@
             管理员操作
         </div>
         <ol class="am-breadcrumb">
-            <li><a href="#" class="am-icon-home">首页</a></li>
-            <li class="am-active">博客总览</li>
+            <li><a href="/admin/" class="am-icon-home">首页</a></li>
+            <li class="am-active">添加博客</li>
         </ol>
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 博客总览
+                    <span class="am-icon-code"></span> 表单
                 </div>
 
-
             </div>
+
             <div class="tpl-block">
+
                 <div class="am-g">
-                    <div class="am-u-sm-12">
-                        <form class="am-form">
-                            <table class="am-table am-table-striped am-table-hover table-main">
-                                <thead>
-                                <tr>
-                                    <th class="table-check"><input type="checkbox"
-                                                                   class="tpl-table-fz-check"></th>
-                                    <th class="table-id">ID</th>
-                                    <th class="table-title">标题</th>
-                                    <th class="table-type">介绍</th>
-                                    <th class="table-author am-hide-sm-only">作者</th>
-                                    <th class="table-date am-hide-sm-only">修改日期</th>
-                                    <th class="table-set">操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="blog: ${blogList}">
-                                    <td><input type="checkbox"></td>
-                                    <td th:text="${blog.id}">1</td>
-                                    <td><a href="#" th:text="${blog.title}">Business management</a></td>
-                                    <td th:text="${blog.introduction}">default</td>
-                                    <td class="am-hide-sm-only">YuXingZh</td>
-                                    <td class="am-hide-sm-only" th:text="${#dates.format(blog.modifyTime, 'yyyy-MM-dd')}">2014年9月4日 7:28:47</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <a
-                                                        th:href="'update?articleId='+${blog.id}"
-                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary">
-                                                    <span class="am-icon-pencil-square-o"></span> 编辑
-                                                </a>
-                                                <a th:href="'deleteArticle?articleId='+${blog.id}"
-                                                        class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                    <span class="am-icon-trash-o"></span> 删除
-                                                </a>
+                    <div class="tpl-form-body tpl-form-line">
+                        <form class="am-form tpl-form-line-form"
+                              action="/admin/addArticle"
+                              method="post" >
+                            <div class="am-form-group">
+                                <label
+                                        for="user-name"
+                                        class="am-u-sm-3 am-form-label">标题 <span
+                                        class="tpl-form-line-small-title">Title</span></label>
+                                <div class="am-u-sm-9">
+                                    <input id="id" th:if="${article.id}!=null"
+                                           name="id"
+                                           th:value="${article.id}"
+                                           type="hidden">
+                                    <input th:if="${article.title}!=null"
+                                           th:placeholder="${article.title}"
+                                           type="text" class="tpl-form-input"
+                                           id="title"
+                                           placeholder="请输入标题文字">
+                                    <small>请填写标题文字10-20字左右。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-email" class="am-u-sm-3 am-form-label">发布时间 <span
+                                        class="tpl-form-line-small-title">Time</span></label>
+                                <div class="am-u-sm-9">
+                                    <input
+                                            type="text"
+                                            class="am-form-field tpl-form-no-bg" id = "createTime"
+                                            placeholder="发布时间" data-am-datepicker="" readonly/>
+                                    <small>发布时间为必填</small>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">描述一下你的博客 <span
+                                        class="tpl-form-line-small-title">Description</span></label>
+                                <div class="am-u-sm-9">
+                                    <input th:if="${article.introduction}!=null"
+                                           th:placeholder="${article.introduction}"
+                                           type="text"
+                                           id="introduction"
+                                           placeholder="描述一下你的博客">
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-weibo"
+                                       class="am-u-sm-3 am-form-label">添加标签
+                                    <span
+                                            class="tpl-form-line-small-title">Type</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="tags"
+                                           placeholder="请添加分类用逗号隔开">
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">隐藏文章</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox"
+                                               class="ios-switch bigswitch tpl-switch-btn" checked/>
+                                        <div class="tpl-switch-btn-view">
+                                            <div>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <!--预留分页接口-->
-                            <!--<div class="am-cf">-->
+                                    </div>
 
-                                <!--<div class="am-fr">-->
-                                    <!--<ul class="am-pagination tpl-pagination">-->
-                                        <!--<li class="am-disabled"><a href="#">«</a></li>-->
-                                        <!--<li class="am-active"><a href="#">1</a></li>-->
-                                        <!--<li><a href="#">2</a></li>-->
-                                        <!--<li><a href="#">3</a></li>-->
-                                        <!--<li><a href="#">4</a></li>-->
-                                        <!--<li><a href="#">5</a></li>-->
-                                        <!--<li><a href="#">»</a></li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <hr>
+                                </div>
+                            </div>
 
+                            <div class="am-form-group">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">文章内容</label>
+                                <div class="am-u-sm-9">
+                                    <textarea th:if="${article.content}!=null"
+                                              th:placeholder="${article.content}" class=""
+                                              rows="10" id="content"
+                                              placeholder="请输入文章内容"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" onclick="login()"
+                                            class="am-btn am-btn-primary tpl-btn-bg-color-success ">
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-            <div class="tpl-alert"></div>
+
+
         </div>
 
 
@@ -305,9 +366,9 @@
 </div>
 
 
-<script src="../static/js/jquery.min.js" th:src="@{~/js/jquery.min.js}"></script>
-<script src="../static/js/amazeui.min.js" th:src="@{~/js/amazeui.min.js}"></script>
-<script src="../static/js/app.js" th:src="@{~/js/app.js}"></script>
+<script th:src="@{~/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+<script th:src="@{~/js/amazeui.min.js}" src="../static/js/amazeui.min.js"></script>
+<script th:src="@{~/js/app.js}" src="../static/js/app.js"></script>
 </body>
 
 </html>

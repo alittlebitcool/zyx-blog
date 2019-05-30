@@ -31,11 +31,11 @@ public class BlogController {
 
     @GetMapping("/showAll")
     public String listEsblogs(
-            @RequestParam(value="order",required=false,defaultValue="new") String order,
-            @RequestParam(value="keyword",required=false,defaultValue="" ) String keyword,
-            @RequestParam(value="async",required=false) boolean async,
-            @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
-            @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+            @RequestParam(value = "order", required = false, defaultValue = "new") String order,
+            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+            @RequestParam(value = "async", required = false) boolean async,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             Model model) {
         model.addAttribute("blogList", articleService.getAllBlog());
         model.addAttribute("hotList", articleService.selectHotArticle());
@@ -45,15 +45,24 @@ public class BlogController {
 
     @GetMapping("/keyWordsSearch")
     public String keyWordsSearch(
-            @RequestParam(value="keyWords",required=false,defaultValue="new") String keyWords,
-            @RequestParam(value="order",required=false,defaultValue="new") String order,
-            @RequestParam(value="keyword",required=false,defaultValue="" ) String keyword,
-            @RequestParam(value="async",required=false) boolean async,
-            @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
-            @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize,
+            @RequestParam(value = "keyWords", required = false, defaultValue = "new") String keyWords,
+            @RequestParam(value = "order", required = false, defaultValue = "new") String order,
+            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+            @RequestParam(value = "async", required = false) boolean async,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
             Model model) throws IOException, ParseException {
         model.addAttribute("blogList",
                 Transformation.jsontoarticle(elasticsearchFeign.keyWordsSearch(keyWords)));
+        model.addAttribute("hotList", articleService.selectHotArticle());
+        model.addAttribute("tags", tagService.selectAllTags());
+        return "/index";
+    }
+
+    @GetMapping("/tagSearch")
+    public String tagSearch(@RequestParam(value = "tag", required =
+            false) String tag, Model model) throws IOException, ParseException {
+        model.addAttribute("blogList", articleService.tagSearch(tag));
         model.addAttribute("hotList", articleService.selectHotArticle());
         model.addAttribute("tags", tagService.selectAllTags());
         return "/index";

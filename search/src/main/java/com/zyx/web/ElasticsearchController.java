@@ -16,10 +16,7 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -34,7 +31,7 @@ import java.util.Map;
  * @Date ：Created in 15:45 2019/5/25
  * @Description：
  */
-@Controller
+@RestController
 @RequestMapping("/elasticsearch")
 public class ElasticsearchController {
     @Autowired

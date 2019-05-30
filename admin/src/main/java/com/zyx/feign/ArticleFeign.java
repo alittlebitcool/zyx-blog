@@ -24,11 +24,19 @@ public interface ArticleFeign {
                     MediaType.APPLICATION_JSON_UTF8_VALUE)
     List<Article> showAll();
 
-    @RequestMapping(value = "/deleteArticle", method = RequestMethod.POST)
-    void deleteArticle(@RequestParam(value = "articleId", required = true) int articleId);
+    @RequestMapping(value = "/deleteArticle", method = RequestMethod.GET)
+    void deleteArticle(@RequestParam(value = "articleId") int articleId);
 
     @RequestMapping(value = "/addArticle",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     int addArticle(@RequestBody Map<String, Object> map);
+
+    @RequestMapping(value = "/updateArticle",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    int updateArticle(@RequestBody Map<String, Object> map);
+
+    @RequestMapping(value = "/getSpecialArticle", method = RequestMethod.GET)
+    Article getSpecialArticle(@RequestParam("articleId")int articleId);
 }

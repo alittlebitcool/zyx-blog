@@ -18,9 +18,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -118,6 +120,43 @@ public class ArticleServiceImplTest {
             }
         }
         System.out.println(res);
+    }
+
+    @Test
+    public void test3() throws ParseException {
+//        Article article = new Article();
+//        article.setId(11);
+//        article.setTitle("title");
+//        article.setContent("content");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        article.setModifyTime(new Date());
+//        article.setIntroduction("introduction");
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("id", "83");
+//        map.put("tags", "test");
+//        map.put("title", "test");
+//        map.put("content", "test");
+//        map.put("instroduction", "test");
+//        map.put("createTime", "1029-01-10");
+//        articleService.deleteArticle(85);
+//        Tag tag = new Tag();
+//        tag.setName("这是一个");
+//        Example example = new Example(Tag.class);
+//        example.and().andEqualTo("name","博客好吧");
+//        tagMapper.selectByExample(example);
+//        List<Integer> ids =
+//                tagMapper.selectByExample(example).stream().map(Tag::getId).collect(Collectors.toList());
+//        List<TagArticle> tagArticles = new ArrayList<>();
+//        for (int i : ids) {
+//            Example example1 = new Example(TagArticle.class);
+//            example1.and().andEqualTo("tagId",i);
+//            tagArticles.add(tagArticleMapper.selectOneByExample(example1));
+//        }
+//        List<Article> articles = articleMapper.selectByIdList(tagArticles.stream().map(TagArticle::getArticleId).collect(Collectors.toList()));
+//
+//        System.out.println(articles);
+
+        System.out.println(Integer.valueOf("111"));
     }
 
 }
