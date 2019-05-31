@@ -56,6 +56,26 @@
     <script th:href="@{~/detail/js/respond.min.js}"
             src="/static/detail/js/respond.min.js"></script>
     <![endif]==========-->
+    <script type="text/javascript">
+        function login() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var comment = document.getElementById("comment").value;
+            var id = document.getElementById("id").value;
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/details/addComment',
+                contentType: "application/json",
+                data:JSON.stringify({
+                    "name": name,
+                    "email": email,
+                    "comment": comment,
+                    "id": id
+                })
+            });
+        }
+    </script>
 </head>
 <body class="home">
 
@@ -171,7 +191,7 @@
                         <div class="media comment">
 
                             <!--Comments-->
-                            <div class="media comment">
+                            <div class="media comment" th:each="comment: ${comments}">
                                 <div class="media-left">
                                     <a href="#"><img
                                             src="/static/detail/images/posts/c1.jpg"
@@ -180,12 +200,17 @@
                                             th:src="@{~/detail/images/posts/c1.jpg}"></a>
                                 </div>
                                 <div class="media-body">
-                                    <h4><a href="#">Mark Sanders</a></h4>
-                                    <h5><a href="#" class="date">feb 17, 2016 at
+                                    <h4 th:text="${comment.username}"><a href="#"
+                                           >Mark
+                                        Sanders</a></h4>
+                                    <h5 th:text="${comment.email}"><a href="#"
+                                           class="date">feb 17,
+                                        2016 at
                                         3:30pm</a> | <a
                                             href="#"
                                             class="reply-link">reply</a></h5>
-                                    <p>It has survived not only five centuries,
+                                    <p th:text="${comment.comment}" >It has
+                                        survived not only five centuries,
                                         but also the leap
                                         into electronic typesetting, remaining
                                         essentially
@@ -194,31 +219,38 @@
                             </div>
                         </div>
                     </div>
-                    <form action="#" method="post" class="comment-form row"
+                    <form class="comment-form row"
                           id="comment-form">
                         <h5 class="form-title">leave a reply</h5>
                         <div class="form-group col-sm-6">
                             <label for="name">your name*</label>
-                            <input type="text" id="name" class="form-control"
+                            <input type="text" name="name" id="name"
+                                   class="form-control"
                                    placeholder="Your name" required>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="email">your email*</label>
-                            <input type="email" id="email" class="form-control"
+                            <input type="email" name="email" id="email"
+                                   class="form-control"
                                    placeholder="Your email address here"
                                    required>
                         </div>
                         <div class="form-group col-sm-12">
-                            <label for="message">your comment</label>
-                            <textarea name="message" id="message"
+                            <labmedia-leftel for="message">your comment</labmedia-leftel>
+                            <textarea name="comment" id="comment"
                                       class="form-control"
                                       placeholder="Write message here"></textarea>
                         </div>
                         <div class="col-sm-12">
-                            <button type="submit" class="btn-primary">
-                                <span>send</span></button>
+                            <input id="id" th:if="${article.id}!=null"
+                                   name="id"
+                                   th:value="${article.id}"
+                                   type="hidden">
+                            <button type="button" onclick="login()" class="btn-primary">
+                                <span onclick="login()">send</span></button>
                             <h5 class="pull-right">*required fields</h5>
                         </div>
+
                     </form>
                 </article>
             </div>

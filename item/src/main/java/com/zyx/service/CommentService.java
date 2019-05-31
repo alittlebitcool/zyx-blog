@@ -1,9 +1,9 @@
 package com.zyx.service;
 
 import com.zyx.entity.Comment;
-import com.zyx.entity.vo.CommentArticle;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author YuXingZh
@@ -22,6 +22,12 @@ public interface CommentService {
      * get all the comments details from the comment table
      * @return
      */
-    public List<Comment> getAllComment(int articleId) ;
+    List<Comment> getSpecialComment(int articleId) ;
+
+    /**
+     * add comment in special article
+     * @return
+     */
+    int addComment(Map<String, Object> map);
 
 }

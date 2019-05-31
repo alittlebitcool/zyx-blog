@@ -1,18 +1,16 @@
 package com.zyx.service.Impl;
 
-import com.zyx.dao.ArticleMapper;
 import com.zyx.dao.CommentArticleMapper;
 import com.zyx.dao.CommentMapper;
-import com.zyx.entity.Article;
 import com.zyx.entity.Comment;
 import com.zyx.entity.vo.CommentArticle;
 import com.zyx.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +23,10 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentArticleMapper commentArticleMapper;
 
-    public List<Integer> getAllTags(int articleId) {
+    @Autowired
+    CommentMapper commentMapper;
+
+    public List<Integer> getAllIds(int articleId) {
         CommentArticle example = new CommentArticle();
         example.setArticleId(articleId);
         List<CommentArticle> list = commentArticleMapper.select(example);
@@ -39,7 +40,33 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     @Override
-    public List<Comment> getAllComment(int articleId) {
-        return commentArticleMapper.selectByIdList(getAllTags(articleId));
+    public List<Comment> getSpecialComment(int articleId) {
+        return commentArticleMapper.selectByIdList(getAllIds(articleId));
+    }
+
+    /**
+     * add comment in special article
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public int addComment(Map<String, Object> map) {
+        Comment comment = new Comment();
+        comment.setUsername((String) map.get("name"));
+        comment.setComment((String) map.get("comment"));
+        comment.setCreateTime(new Date());
+        comment.setEmail((String) map.get("email"));
+        commentMapper.insertSelective(comment);
+
+        int id = Integer.valueOf((String) map.get("id"));
+
+        CommentArticle commentArticle = new CommentArticle();
+        commentArticle.setCommentId(comment.getId());
+        commentArticle.setArticleId(id);
+        commentArticle.setCreateTime(new Date());
+        commentArticle.setModifyTime(new Date());
+        commentArticleMapper.insertSelective(commentArticle);
+        return id;
     }
 }

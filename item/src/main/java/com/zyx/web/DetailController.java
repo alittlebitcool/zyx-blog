@@ -8,12 +8,11 @@ import com.zyx.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author YuXingZh
@@ -40,16 +39,37 @@ public class DetailController {
      */
     @ResponseBody
     @RequestMapping("/getAllComment")
-    public List<Comment> getAllComment(@RequestParam("articleId") int articleId) {
-        return commentService.getAllComment(articleId);
+    public List<Comment> getSpecialComment(@RequestParam("articleId") int articleId) {
+        return commentService.getSpecialComment(articleId);
     }
 
     @GetMapping("/showArticle")
     public String showArticle(@RequestParam("articleId") int articleId, Model model) {
         Article article = articleService.getSpecial(articleId);
         model.addAttribute("article", article);
-        model.addAttribute("comments", commentService.getAllComment(articleId));
+        model.addAttribute("comments", commentService.getSpecialComment(articleId));
         model.addAttribute("tags", tagService.getSpecialTag(articleId));
+        model.addAttribute("id", articleId);
+        List<Article> recommendArticle = articleService.recommendArticle(article.getTitle());
+        if (recommendArticle.size() == 2) {
+            model.addAttribute("recommend1", recommendArticle.get(0));
+            model.addAttribute("recommend2", recommendArticle.get(1));
+        }
+        return "detail";
+    }
+
+    /**
+     * add comment
+     */
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
+    public String addComment(Model model,
+                             HttpServletRequest request, @RequestBody Map<String, Object> map) {
+        int articleId = commentService.addComment(map);
+        Article article = articleService.getSpecial(articleId);
+        model.addAttribute("article", article);
+        model.addAttribute("comments", commentService.getSpecialComment(articleId));
+        model.addAttribute("tags", tagService.getSpecialTag(articleId));
+        model.addAttribute("id", articleId);
         List<Article> recommendArticle = articleService.recommendArticle(article.getTitle());
         if (recommendArticle.size() == 2) {
             model.addAttribute("recommend1", recommendArticle.get(0));

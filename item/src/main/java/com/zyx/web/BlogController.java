@@ -2,17 +2,17 @@ package com.zyx.web;
 
 import com.zyx.feign.ElasticsearchFeign;
 import com.zyx.service.ArticleService;
+import com.zyx.service.CommentService;
 import com.zyx.service.TagService;
 import com.zyx.util.Transformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Map;
 
 /**
  * Created by YuXingZh on 19-3-20
@@ -21,6 +21,9 @@ import java.text.ParseException;
 @RequestMapping("/blogs")
 public class BlogController {
     @Autowired
+    CommentService commentService;
+
+    @Autowired
     ArticleService articleService;
 
     @Autowired
@@ -28,6 +31,7 @@ public class BlogController {
 
     @Autowired
     TagService tagService;
+
 
     @GetMapping("/showAll")
     public String listEsblogs(
@@ -67,4 +71,6 @@ public class BlogController {
         model.addAttribute("tags", tagService.selectAllTags());
         return "/index";
     }
+
+
 }

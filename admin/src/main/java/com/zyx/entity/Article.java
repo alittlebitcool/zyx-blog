@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -15,7 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name="article")
 public class Article {
-    private int id;
+    @Id
+    private Integer id;
     private String title;
     private String introduction;
     private String content;
