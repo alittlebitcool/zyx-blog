@@ -72,7 +72,8 @@
                     "email": email,
                     "comment": comment,
                     "id": id
-                })
+                }),
+                window:location.href="/details/showArticle?articleId="+id
             });
         }
     </script>
@@ -203,7 +204,7 @@
                                     <h4 th:text="${comment.username}"><a href="#"
                                            >Mark
                                         Sanders</a></h4>
-                                    <h5 th:text="${comment.email}"><a href="#"
+                                    <h5 th:text="${comment.createTime}"><a href="#"
                                            class="date">feb 17,
                                         2016 at
                                         3:30pm</a> | <a
@@ -220,7 +221,8 @@
                         </div>
                     </div>
                     <form class="comment-form row"
-                          id="comment-form">
+                          id="comment-form" action="/details/addComment"
+                          method="post" >
                         <h5 class="form-title">leave a reply</h5>
                         <div class="form-group col-sm-6">
                             <label for="name">your name*</label>
@@ -246,7 +248,7 @@
                                    name="id"
                                    th:value="${article.id}"
                                    type="hidden">
-                            <button type="button" onclick="login()" class="btn-primary">
+                            <button type="button" class="btn-primary">
                                 <span onclick="login()">send</span></button>
                             <h5 class="pull-right">*required fields</h5>
                         </div>
