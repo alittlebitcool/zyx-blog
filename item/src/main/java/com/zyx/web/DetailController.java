@@ -61,7 +61,8 @@ public class DetailController {
     /**
      * add comment
      */
-    @RequestMapping(value = "/addComment", method = RequestMethod.GET)
+    @ResponseBody
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Model model,
                              HttpServletRequest request, @RequestBody Map<String, Object> map) {
         int articleId = commentService.addComment(map);

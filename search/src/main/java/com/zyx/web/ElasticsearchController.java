@@ -49,6 +49,7 @@ public class ElasticsearchController {
         map.put("createTime", dateFormat.format(new Date()));
         map.put("likes", 0);
         map.remove("tags");
+        map.put("id", String.valueOf(map.get("id")));
         // 其他和和原json格式一致
         indexRequest.source(map);
         //创建client对象向ES提交请求

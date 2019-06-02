@@ -46,7 +46,7 @@ public class FeignController {
         article.setModifyTime(simpleDateFormat.parse((String) map.get("createTime")));
         article.setTitle((String) map.get("title"));
         articleService.addArticleId(article);
-        if (StringUtils.isEmpty(tags)) {
+        if (!StringUtils.isEmpty(tags)) {
             tagService.addTags(tags, article.getId());
         }
         return article.getId();

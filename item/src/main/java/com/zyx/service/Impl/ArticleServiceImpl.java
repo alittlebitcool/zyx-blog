@@ -2,9 +2,11 @@ package com.zyx.service.Impl;
 
 import com.hankcs.hanlp.suggest.Suggester;
 import com.zyx.dao.ArticleMapper;
+import com.zyx.dao.TagArticleMapper;
 import com.zyx.dao.TagMapper;
 import com.zyx.entity.Article;
 import com.zyx.entity.Tag;
+import com.zyx.entity.vo.TagArticle;
 import com.zyx.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     TagMapper tagMapper;
+
+    @Autowired
+    TagArticleMapper tagArticleMapper;
 
     /**
      * 获取所有的博客
@@ -140,9 +145,13 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public List<Article> tagSearch(String name) {
-        Example example = new Example(Tag.class);
-        example.and().andEqualTo("name", name);
-        tagMapper.selectByExample(example);
-        return articleMapper.selectByIdList(tagMapper.selectByExample(example).stream().map(Tag::getId).collect(Collectors.toList()));
+        List<Integer> tagIds = tagMapper.tagSearch(name).stream().map(Tag::getId).collect(Collectors.toList());
+        List<TagArticle> select = new ArrayList<>();
+        for (int tagId : tagIds) {
+            TagArticle tagArticle = new TagArticle();
+            tagArticle.setTagId(tagId);
+            select.add(tagArticleMapper.selectOne(tagArticle));
+        }
+        return articleMapper.selectByIdList(select.stream().map(TagArticle::getArticleId).collect(Collectors.toList()));
     }
 }

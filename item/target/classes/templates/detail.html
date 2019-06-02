@@ -184,7 +184,8 @@
                     </ul>
 
                     <div class="row m0 comments">
-                        <h5 class="response-count">5 comments<a
+                        <h5 class="response-count"
+                            th:text="${comments.size()}+  comments"><a
                                 href="#comment-form"
                                 class="btn btn-primary pull-right"><span>add comment</span></a>
                         </h5>

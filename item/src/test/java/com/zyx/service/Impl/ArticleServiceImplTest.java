@@ -159,4 +159,8 @@ public class ArticleServiceImplTest {
         System.out.println(Integer.valueOf("111"));
     }
 
+    @Test
+    public void test4() {
+        System.out.println(articleService.tagSearch("机器学习"));
+    }
 }
