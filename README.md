@@ -54,7 +54,7 @@
 
 词图：一个词A的下一个词可能是B的话，那么A和B之间具有一条路径E(A,B)。一个词可能有多个后续，同时也可能有多个前驱，它们构成的图我称作词图。
 
-![1559396390837](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559396390837.png)
+![1559396390837](backups/photo/1559396390837.png)
 
 
 
@@ -85,7 +85,7 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 ​	它的公式是：
 
-![1559394683825](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559394683825.png)
+![1559394683825](backups/photo/1559394683825.png)
 
 ​	TextRank中一个单词i的权重取决于与在i前面的各个点j组成的(j,i)这条边的权重，以及j这个点到其他其他边的权重之和。右侧的求和表示每个相邻句子对本句子的贡献程度。
 
@@ -143,7 +143,7 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 ### eureka服务注册与发现
 
-![1559477982958](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559477982958.png)
+![1559477982958](backups/photo/1559477982958.png)
 
 每个服务都会自动注册到eureka上面，每当有服务宕机就能即使发现。
 
@@ -161,7 +161,7 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 登录：
 
-![1559478664539](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559478664539.png)
+![1559478664539](backups/photo/1559478664539.png)
 
 
 
@@ -169,23 +169,23 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 查看：
 
-![1559478145120](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559478145120.png)
+![1559478145120](backups/photo/1559478145120.png)
 
 
 
 添加博客：
 
-![1559478585487](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559478585487.png)
+![1559478585487](backups/photo/1559478585487.png)
 
 删除：
 
-![1559478721795](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559478721795.png) 
+![1559478721795](backups/photo/1559478721795.png) 
 
 
 
 编辑：
 
-![1559478760728](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559478760728.png)
+![1559478760728](backups/photo/1559478760728.png)
 
 
 
@@ -203,57 +203,55 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 展示：
 
-![1559480020688](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480020688.png)
+![1559480020688](backups/photo/1559480020688.png)
 
 
 
 热门文章：
 
-![1559480006909](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480006909.png)
+![1559480006909](backups/photo/1559480006909.png)
 
 
 
 所有标签：
 
-![1559480035704](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480035704.png)
+![1559480035704](backups/photo/1559480035704.png)
 
 
 
 根据标签进行搜索：
 
-![1559482203355](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559482203355.png)
+![1559482203355](backups/photo/1559482203355.png)
 
 
 
 详情内容页面：
 
-![1559480060668](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480060668.png)
+![1559480060668](backups/photo/1559480060668.png)
 
 
 
 自动推荐：
 
-![1559480082317](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480082317.png)
-
-
+![1559480082317](backups/photo/1559480082317.png)
 
 评论功能：
 
-![1559480120374](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480120374.png)
+![1559480120374](backups/photo/1559480120374.png)
 
 
 
 更新评论：
 
-![1559480646567](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480646567.png)
+![1559480646567](backups/photo/1559480646567.png)
 
-![1559480730051](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559480730051.png)
+![1559480730051](backups/photo/1559480730051.png)
 
 
 
 搜索引擎，推荐进行强调处理：
 
-![1559482311350](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559482311350.png)
+![1559482311350](backups/photo/1559482311350.png)
 
 
 
@@ -265,7 +263,7 @@ Aho-Corasick是基于Trie树且是KMP模式匹配算法的扩展：Trie树的核
 
 主要的推荐，排序功能在这里实现：
 
-![1559482914973](C:\Users\YuXingZh\AppData\Roaming\Typora\typora-user-images\1559482914973.png)
+![1559482914973](backups/photo/1559482914973.png)
 
 
 
