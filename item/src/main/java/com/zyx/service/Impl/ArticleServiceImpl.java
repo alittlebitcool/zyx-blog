@@ -154,4 +154,28 @@ public class ArticleServiceImpl implements ArticleService {
         }
         return articleMapper.selectByIdList(select.stream().map(TagArticle::getArticleId).collect(Collectors.toList()));
     }
+
+    /**
+     * fulfill the empty array
+     *
+     * @return
+     */
+    @Override
+    public List<Article> paddingArray() {
+        List<Article> res = new ArrayList<>();
+        Article article = new Article();
+        article.setTitle("<tag style=\"color:red\">您搜索的关键词不存在</tag>");
+        article.setIntroduction("<tag style=\"color:red" +
+                "\">下面为您随机推荐，或选择合适的关键词</tag" +
+                ">");
+        res.add(article);
+        List<Article> temp = articleMapper.selectAll();
+        int random1 = (int) (Math.random() * temp.size() - 1);
+        int random2 = (random1 + 1) % temp.size();
+        int random3 = (random1 + 3) % temp.size();
+        res.add(temp.get(random1));
+        res.add(temp.get(random2));
+        res.add(temp.get(random3));
+        return res;
+    }
 }

@@ -59,4 +59,10 @@ public interface ArticleService {
      * @return
      */
     List<Article> tagSearch(String tag);
+
+    /**
+     * fulfill the empty array
+     * @return
+     */
+    List<Article> paddingArray();
 }

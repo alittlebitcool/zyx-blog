@@ -7,7 +7,9 @@ import com.zyx.entity.vo.CommentArticle;
 import com.zyx.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +29,9 @@ public class CommentServiceImpl implements CommentService {
     CommentMapper commentMapper;
 
     public List<Integer> getAllIds(int articleId) {
-        CommentArticle example = new CommentArticle();
-        example.setArticleId(articleId);
-        List<CommentArticle> list = commentArticleMapper.select(example);
+        Example example = new Example(CommentArticle.class);
+        example.createCriteria().andEqualTo("articleId", articleId);
+        List<CommentArticle> list = commentArticleMapper.selectByExample(example);
         return list.stream().map(i -> i.getCommentId()).distinct().collect(Collectors.toList());
     }
 
@@ -41,6 +43,17 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public List<Comment> getSpecialComment(int articleId) {
+        List<Integer> ids  = getAllIds(articleId);
+        if (ids.isEmpty()) {
+            List<Comment> res = new ArrayList<>();
+            Comment comment = new Comment();
+            comment.setEmail("617058979@qq.com");
+            comment.setComment("欢迎大家积极评论啊！");
+            comment.setCreateTime(new Date());
+            comment.setUsername("郑煜星");
+            comment.setId(0);
+            return res;
+        }
         return commentArticleMapper.selectByIdList(getAllIds(articleId));
     }
 

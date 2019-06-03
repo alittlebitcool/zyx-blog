@@ -39,3 +39,8 @@ eureka:
     service-url:
       # eureka集群
       defaultZone: http://localhost:18761/eureka,http://localhost:28761/eureka
+
+
+feign:
+  hystrix:
+    enabled: true

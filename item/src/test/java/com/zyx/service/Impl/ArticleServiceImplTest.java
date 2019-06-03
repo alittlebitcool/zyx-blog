@@ -4,6 +4,7 @@ import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
 import com.hankcs.hanlp.suggest.Suggester;
+import com.hankcs.hanlp.tokenizer.NLPTokenizer;
 import com.zyx.dao.ArticleMapper;
 import com.zyx.dao.TagArticleMapper;
 import com.zyx.dao.TagMapper;
@@ -124,43 +125,56 @@ public class ArticleServiceImplTest {
 
     @Test
     public void test3() throws ParseException {
-//        Article article = new Article();
-//        article.setId(11);
-//        article.setTitle("title");
-//        article.setContent("content");
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        article.setModifyTime(new Date());
-//        article.setIntroduction("introduction");
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("id", "83");
-//        map.put("tags", "test");
-//        map.put("title", "test");
-//        map.put("content", "test");
-//        map.put("instroduction", "test");
-//        map.put("createTime", "1029-01-10");
-//        articleService.deleteArticle(85);
-//        Tag tag = new Tag();
-//        tag.setName("这是一个");
-//        Example example = new Example(Tag.class);
-//        example.and().andEqualTo("name","博客好吧");
-//        tagMapper.selectByExample(example);
-//        List<Integer> ids =
-//                tagMapper.selectByExample(example).stream().map(Tag::getId).collect(Collectors.toList());
-//        List<TagArticle> tagArticles = new ArrayList<>();
-//        for (int i : ids) {
-//            Example example1 = new Example(TagArticle.class);
-//            example1.and().andEqualTo("tagId",i);
-//            tagArticles.add(tagArticleMapper.selectOneByExample(example1));
-//        }
-//        List<Article> articles = articleMapper.selectByIdList(tagArticles.stream().map(TagArticle::getArticleId).collect(Collectors.toList()));
-//
-//        System.out.println(articles);
+        Article article = new Article();
+        article.setId(11);
+        article.setTitle("title");
+        article.setContent("content");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        article.setModifyTime(new Date());
+        article.setIntroduction("introduction");
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", "83");
+        map.put("tags", "test");
+        map.put("title", "test");
+        map.put("content", "test");
+        map.put("instroduction", "test");
+        map.put("createTime", "1029-01-10");
+        articleService.deleteArticle(85);
+        Tag tag = new Tag();
+        tag.setName("这是一个");
+        Example example = new Example(Tag.class);
+        example.and().andEqualTo("name","博客好吧");
+        tagMapper.selectByExample(example);
+        List<Integer> ids =
+                tagMapper.selectByExample(example).stream().map(Tag::getId).collect(Collectors.toList());
+        List<TagArticle> tagArticles = new ArrayList<>();
+        for (int i : ids) {
+            Example example1 = new Example(TagArticle.class);
+            example1.and().andEqualTo("tagId",i);
+            tagArticles.add(tagArticleMapper.selectOneByExample(example1));
+        }
+        List<Article> articles = articleMapper.selectByIdList(tagArticles.stream().map(TagArticle::getArticleId).collect(Collectors.toList()));
 
-        System.out.println(Integer.valueOf("111"));
+        System.out.println(articles);
+
     }
 
     @Test
     public void test4() {
-        System.out.println(articleService.tagSearch("机器学习"));
+        System.out.println(commentService.getSpecialComment(111));
+    }
+
+    @Test
+    public void keywordExtraction() {
+//        Scanner s = new Scanner(System.in);
+
+        String content = "程序员(英文Programmer)是从事程序开发、维护的专业人员。一般将程序员分为程序设计人员和程序编码人员，但两者的界限并不非常清楚，特别是在中国。软件从业人员分为初级程序员、高级程序员、系统分析员和项目经理四大类。";
+        List<String> keywordList = HanLP.extractKeyword(content, 5);
+        System.out.println(keywordList);
+
+        System.out.println(NLPTokenizer.segment("我新造一个词叫幻想乡你能识别并标注正确词性吗？"));
+// 注意观察下面两个“希望”的词性、两个“晚霞”的词性
+        System.out.println(NLPTokenizer.analyze("我的希望是希望张晚霞的背影被晚霞映红").translateLabels());
+        System.out.println(NLPTokenizer.analyze("支援臺灣正體香港繁體：微软公司於1975年由比爾·蓋茲和保羅·艾倫創立。"));
     }
 }

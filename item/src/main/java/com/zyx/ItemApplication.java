@@ -24,9 +24,6 @@ import java.util.Scanner;
 @EnableCircuitBreaker
 @MapperScan("com.zyx.dao")
 @EnableFeignClients(basePackages = { "com.zyx.feign"})
-@EnableDiscoveryClient
-@EnableHystrix
-@EnableHystrixDashboard
 public class ItemApplication {
     public static void main(String[] args) {
         System.out.println("请指定item的启动端口号：");

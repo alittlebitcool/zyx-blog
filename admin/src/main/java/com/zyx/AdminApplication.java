@@ -1,5 +1,6 @@
 package com.zyx;
 
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

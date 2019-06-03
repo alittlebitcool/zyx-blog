@@ -1,0 +1,9 @@
+eureka:
+  instance:
+    hostname: localhost
+    # 心跳时间，表示eureka client发送心跳给eureka server端的频率（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+  client:
+    service-url:
+      # 指定eureka服务器集群列表地址
+      defaultZone: http://localhost:18761/eureka,http://localhost:28761/eureka

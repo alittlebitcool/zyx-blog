@@ -326,6 +326,84 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-12 blog-grid-style hover-effect-one" >
+
+                <div class="single-blog-post"  th:if="${alarm} != null">
+                    <div class="image-box">
+                        <img src="../static/index/images/blog/4.jpg" alt=""
+                             th:src="@{'~/index/images/blog/4.jpg'}">
+                    </div>
+                    <div class="post-meta-box bg-box">
+                        <ul class="author-meta clearfix">
+                            <li class="tag"><a href="#">Recommend</a></li>
+                            <li class="date">
+                                <a href="#">
+                                    <!--15 may , 2018-->
+                                </a>
+                            </li>
+                        </ul>
+                        <h4 class="title">
+                            <a th:utext="${alarm.title}">
+                                <a href="#">
+                                    <!--This is a standard post with an image-->
+                                </a>
+                            </a>
+                        </h4>
+                        <ul class="share-meta clearfix">
+                            <li>
+                                <a href="#">
+                                    <i class="icon flaticon-comment"></i>Comments (04)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon flaticon-like-heart"></i>Likes (02)
+                                </a>
+                            </li>
+                            <li class="share-option">
+                                <button>
+                                    <i class="icon flaticon-arrows"></i>
+                                    Share
+                                </button>
+                                <ul class="share-icon">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-google-plus-g"></i></a></li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> <!-- /.share-option -->
+                        </ul>
+                        <p th:utext="${alarm.introduction}">
+                            <!--<p>-->
+                            <!--One morning, when Gregor Samsa woke from -->
+                            <!--troubled -->
+                            <!--dreams, he found-->
+                            <!--himself transformed in his bed into a horrible vermin. He lay on his-->
+                            <!--armour-like back, and if he lifted his head a little he could see his-->
+                            <!--brown belly, slightly domed and divided by arches into stiff sections.-->
+                            <!--The bedding was hardly able to cover it and seemed ready to slide off-->
+                            <!--any moment.-->
+                        </p>
+                    </div> <!-- /.post-meta-box -->
+                </div> <!-- /.single-blog-post -->
+
+
+
+
+
                 <div class="single-blog-post" th:each="blog : ${blogList}">
                     <div class="image-box">
                         <img src="../static/index/images/blog/1.jpg" alt=""
